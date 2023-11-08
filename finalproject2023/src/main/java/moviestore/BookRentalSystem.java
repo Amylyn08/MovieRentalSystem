@@ -1,9 +1,16 @@
 package moviestore;
 import java.util.*;
 
-public class BookRentalSystem extends Displayer{
+public class BookRentalSystem{
     
     //make displayer field -- add later 
+    
+    private List<Movie> movies;
+
+    public BookRentalSystem(List<Movie> movies)
+    {
+        this.movies = movies;
+    }
 
     /**
      * This method loads a list of movies 

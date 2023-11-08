@@ -1,7 +1,9 @@
 package moviestore;
 
 public class DVD extends Movie {
-    
+
+    private int stock;
+
     public DVD(
     String title, String genre, 
     int durationMins, String summary, 
