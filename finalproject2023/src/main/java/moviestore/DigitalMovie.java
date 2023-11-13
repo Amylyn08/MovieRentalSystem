@@ -2,6 +2,7 @@ package moviestore;
 
 public class DigitalMovie extends Movie {
     private int fileSize;
+    private int stock;
 
     public DigitalMovie(
     String title, String genre, 

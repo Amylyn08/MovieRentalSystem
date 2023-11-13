@@ -9,7 +9,6 @@ public abstract class Movie {
     private double additionOfRating;
     private int numRatings;
 
-
     /**
      * constructor initializs the Movie fields
      */

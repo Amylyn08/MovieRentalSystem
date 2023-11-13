@@ -8,10 +8,15 @@ public class Customer {
      * this method initializes the name and sets the points as 0
      * @param {String} - name of customer
      */
-    public Customer(String name)
+    public Customer(String name, int points)
     {
         this.name = name;
-        points = 0;
+        this.points = points;
+    }
+
+    public String getName()
+    {
+        return this.name;
     }
 
     /**
