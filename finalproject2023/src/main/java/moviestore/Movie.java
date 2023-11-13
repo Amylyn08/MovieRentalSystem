@@ -1,5 +1,5 @@
 package moviestore;
-
+import java.util.*;
 public abstract class Movie {
     private String title;
     private String genre;
@@ -39,6 +39,19 @@ public abstract class Movie {
      */
     public double getPrice() {
         return this.price;
+    }
+
+    /**
+     * @return - returns title
+     */
+    public double getAdditionOfRating() {
+        return this.additionOfRating;
+    }
+    /**
+     * @return - returns title
+     */
+    public int getNumRatings() {
+        return this.numRatings;
     }
 
     /**
@@ -103,4 +116,15 @@ public abstract class Movie {
     }
 
     public abstract void rentMovie();
+
+    public List<Movie> addMovie(List<Movie> movies)
+    {
+        if (!(movies.contains(this)))
+        {
+            movies.add(this);
+        }
+        return movies;
+    }
 }
+
+
