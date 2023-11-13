@@ -8,13 +8,26 @@ public class DVD extends Movie {
     String title, String genre, 
     int durationMins, String summary, 
     double starRating, double additionOfRating, 
-    int numRatings, int stock)
+    int numRatings, double price, int stock)
     {
         super(title, genre, 
-        durationMins, summary, 
-        starRating, additionOfRating, 
-        numRatings);
+        durationMins, summary, additionOfRating, 
+        numRatings, price);
         this.stock = stock;
+    }
+
+    /**
+     * overrides toString
+     */
+    @Override
+    public String toString()
+    {
+        throw new UnsupportedOperationException("not written yet");
+    }
+    
+    public void rentMovie()
+    {
+        this.stock = this.stock - 1;
     }
 
 }

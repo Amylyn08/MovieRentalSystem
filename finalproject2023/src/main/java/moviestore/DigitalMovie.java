@@ -8,12 +8,11 @@ public class DigitalMovie extends Movie {
     String title, String genre, 
     int durationMins, String summary, 
     double starRating, double additionOfRating, 
-    int numRatings, int fileSize)
+    int numRatings, double price, int fileSize)
     {
         super(title, genre, 
-        durationMins, summary, 
-        starRating, additionOfRating, 
-        numRatings);
+        durationMins, summary, additionOfRating, 
+        numRatings, price);
         this.fileSize = fileSize;
     }
 
@@ -24,5 +23,10 @@ public class DigitalMovie extends Movie {
     public String toString()
     {
         throw new UnsupportedOperationException("not written yet");
+    }
+
+    public void rentMovie()
+    {
+        this.stock = this.stock - 1;
     }
 }
