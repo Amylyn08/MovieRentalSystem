@@ -9,15 +9,27 @@ public class BookRentalSystem{
 
     public BookRentalSystem(List<Movie> movies)
     {
-        this.movies = movies;
+        this.movies = new ArrayList<Movie>();
+        for(Movie m : movies)
+        {
+            if (m instanceof DVD)
+            {
+                this.movies.add(new DVD((DVD)m));
+            }
+            else
+            {
+                this.movies.add(new DigitalMovie((DigitalMovie)m));
+            }
+        }
     }
 
-    /**
-     * This method loads a list of movies 
-     * @return - gives back a list of movies 
-     */
-    public List<Movie> loadMovies(){
-        throw new UnsupportedOperationException("Not written yet!");
+    public List<Movie> getMovies()
+    {
+        return(this.movies);
     }
+
+    // addMovie method
+
+
 
 }

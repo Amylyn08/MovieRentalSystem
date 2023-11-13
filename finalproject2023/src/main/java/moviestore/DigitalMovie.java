@@ -6,14 +6,23 @@ public class DigitalMovie extends Movie {
 
     public DigitalMovie(
     String title, String genre, 
-    int durationMins, String summary, 
-    double starRating, double additionOfRating, 
-    int numRatings, double price, int fileSize)
+    int durationMins, String summary,
+    double additionOfRating, 
+    int numRatings, double price, int fileSize, int stock)
     {
         super(title, genre, 
         durationMins, summary, additionOfRating, 
         numRatings, price);
         this.fileSize = fileSize;
+        this.stock = stock;
+    }
+
+    public DigitalMovie(DigitalMovie m)
+    {
+        this(m.getTitle(), m.getGenre(), 
+        m.getDurationMins(), m.getSummary(), 
+        m.getAdditionOfRating(), 
+        m.getNumRatings(), m.getPrice(), m.fileSize, m.stock);
     }
 
     /**
