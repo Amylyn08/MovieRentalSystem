@@ -8,16 +8,23 @@ public abstract class Movie {
     private double starRating;
     private double additionOfRating;
     private int numRatings;
+    private double price;
 
     /**
      * constructor initializs the Movie fields
      */
     public Movie(String title, String genre, 
-    int durationMins, String summary, 
-    double starRating, double additionOfRating, 
-    int numRatings)
+    int durationMins, String summary, double additionOfRating, 
+    int numRatings, double price)
     {
-        throw new UnsupportedOperationException("not written yet");
+        this.title = title;
+        this.genre = genre; 
+        this.durationMins = durationMins; 
+        this.summary = summary;
+        this.starRating = additionOfRating / numRatings; 
+        this.additionOfRating = additionOfRating; 
+        this.numRatings = numRatings;
+        this.price = price;
     }
 
     /**
@@ -25,6 +32,13 @@ public abstract class Movie {
      */
     public String getTitle() {
         return this.title;
+    }
+
+    /**
+     * @return - returns title
+     */
+    public double getPrice() {
+        return this.price;
     }
 
     /**
@@ -61,7 +75,21 @@ public abstract class Movie {
      */
     public void addRating(double rating)
     {
-        throw new UnsupportedOperationException("not written yet");
+        this.additionOfRating += rating;
+        this.numRatings++;
+        this.starRating = this.additionOfRating / this.numRatings;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (!(o instanceof Movie))
+        {
+            return(false);
+        }
+
+        Movie other = (Movie) o;
+        return(this.title.equals(other.title));
     }
     
     /**
@@ -70,15 +98,9 @@ public abstract class Movie {
     @Override
     public String toString()
     {
-        throw new UnsupportedOperationException("not written yet");
+        return("Movie Title: " + this.title + ", Genre: " + this.genre + ", Duration: " + this.durationMins + ", Rating: " + this.starRating );
+
     }
 
-    /**
-     * overrides .equals method
-     */
-    @Override
-    public boolean equals(Object other)
-    {
-        throw new UnsupportedOperationException("not written yet");
-    }
+    public abstract void rentMovie();
 }
