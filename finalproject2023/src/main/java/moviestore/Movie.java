@@ -21,7 +21,7 @@ public abstract class Movie {
         this.genre = genre; 
         this.durationMins = durationMins; 
         this.summary = summary;
-        this.starRating = additionOfRating / numRatings; 
+        this.starRating = Math.round(additionOfRating / numRatings * 100) / 100.0; 
         this.additionOfRating = additionOfRating; 
         this.numRatings = numRatings;
         this.price = price;
@@ -35,20 +35,20 @@ public abstract class Movie {
     }
 
     /**
-     * @return - returns title
+     * @return - returns price
      */
     public double getPrice() {
         return this.price;
     }
 
     /**
-     * @return - returns title
+     * @return - returns the addition of ratings
      */
     public double getAdditionOfRating() {
         return this.additionOfRating;
     }
     /**
-     * @return - returns title
+     * @return - returns number of ratings
      */
     public int getNumRatings() {
         return this.numRatings;
@@ -88,21 +88,13 @@ public abstract class Movie {
      */
     public void addRating(double rating)
     {
+        if (rating > 5 || rating < 0.5)
+        {
+            throw new IllegalArgumentException("rating cannot be > 5 or < 05");
+        }
         this.additionOfRating += rating;
         this.numRatings++;
-        this.starRating = this.additionOfRating / this.numRatings;
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (!(o instanceof Movie))
-        {
-            return(false);
-        }
-
-        Movie other = (Movie) o;
-        return(this.title.equals(other.title));
+        this.starRating = Math.round(this.additionOfRating / this.numRatings * 100)/100.0;
     }
     
     /**
@@ -116,15 +108,8 @@ public abstract class Movie {
     }
 
     public abstract void rentMovie();
-
-    public List<Movie> addMovie(List<Movie> movies)
-    {
-        if (!(movies.contains(this)))
-        {
-            movies.add(this);
-        }
-        return movies;
-    }
+    public abstract void returnMovie();
+    public abstract int getStock();
 }
 
 

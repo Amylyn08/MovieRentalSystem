@@ -29,6 +29,17 @@ public class BookRentalSystem{
     }
 
     // addMovie method
+    public void addMovie(Movie m)
+    {
+        if (this.movies.contains(m))
+        {
+            throw new IllegalArgumentException("This movie already exists in the database!");
+        }
+        if (!(movies.contains(m)))
+        {
+            this.movies.add(m);
+        }
+    }
 
 
 

@@ -23,6 +23,11 @@ public class DVD extends Movie {
         m.getNumRatings(), m.getPrice(), m.stock);
     }
 
+    public int getStock()
+    {
+        return(this.stock);
+    }
+
     /**
      * overrides toString
      */
@@ -35,6 +40,22 @@ public class DVD extends Movie {
     public void rentMovie()
     {
         this.stock = this.stock - 1;
+    }
+
+    public void returnMovie()
+    {
+        this.stock = this.stock + 1;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (!(o instanceof DVD))
+        {
+            return(false);
+        }
+        DVD other = (DVD) o;
+        return(this.getTitle().equals(other.getTitle()));
     }
 
 }

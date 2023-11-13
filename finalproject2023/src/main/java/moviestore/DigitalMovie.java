@@ -34,8 +34,34 @@ public class DigitalMovie extends Movie {
         throw new UnsupportedOperationException("not written yet");
     }
 
+    public int getStock()
+    {
+        return(this.stock);
+    }
+
+    public int getFileSize()
+    {
+        return(this.fileSize);
+    }
+
     public void rentMovie()
     {
         this.stock = this.stock - 1;
+    }
+
+    public void returnMovie()
+    {
+        this.stock = this.stock + 1;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (!(o instanceof DigitalMovie))
+        {
+            return(false);
+        }
+        DigitalMovie other = (DigitalMovie) o;
+        return(this.getTitle().equals(other.getTitle()));
     }
 }
