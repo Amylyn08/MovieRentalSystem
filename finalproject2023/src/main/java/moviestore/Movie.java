@@ -116,6 +116,10 @@ public abstract class Movie {
 
     public void rentMovie()
     {
+        if (this.stock <= 0)
+        {
+            throw new IllegalArgumentException("This movie does not have enough stock in the database!");
+        }
         this.stock = this.stock - 1;
     }
 

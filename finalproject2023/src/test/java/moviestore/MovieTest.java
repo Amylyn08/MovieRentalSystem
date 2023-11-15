@@ -99,7 +99,7 @@ public class MovieTest {
         
     }
 
-    /*@Test
+    @Test
     public void bookRentalSystemTestAddMovie()
     {
         List<Movie> movies = new ArrayList<Movie>();
@@ -111,9 +111,22 @@ public class MovieTest {
 
         movies.add(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
 
-        assertEquals(movies.equals());
-        
-    }*/
+        assertTrue(movies.equals(moviesToAddTo.getMovies()));  
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void bookRentalSystemTestAddMovieException()
+    {
+        List<Movie> movies = new ArrayList<Movie>();
+        movies.add(new DigitalMovie("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 1000, 5));
+        movies.add(new DVD("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
+
+        BookRentalSystem moviesToAddTo = new BookRentalSystem(movies);
+        moviesToAddTo.addMovie(new DVD("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
+
+        movies.add(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
+
+    }
 
 
 

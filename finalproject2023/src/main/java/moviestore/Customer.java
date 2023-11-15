@@ -45,6 +45,10 @@ public class Customer {
         rented.add(rent);
     }
 
+    /**
+     * this method allows the customer to return the movie
+     * and removes that movie from their list of rented movies
+     */
     public void returnMovie(Movie rent)
     {
         if (!this.rented.contains(rent))
