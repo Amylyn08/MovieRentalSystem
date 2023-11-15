@@ -9,22 +9,29 @@ public abstract class Movie {
     private double additionOfRating;
     private int numRatings;
     private double price;
+    private int stock;
 
     /**
-     * constructor initializs the Movie fields
+     * constructor initializes the Movie fields
      */
     public Movie(String title, String genre, 
     int durationMins, String summary, double additionOfRating, 
-    int numRatings, double price)
+    int numRatings, double price, int stock)
     {
         this.title = title;
         this.genre = genre; 
         this.durationMins = durationMins; 
         this.summary = summary;
-        this.starRating = additionOfRating / numRatings; 
+        this.starRating = Math.round(additionOfRating / numRatings * 100) / 100.0; 
         this.additionOfRating = additionOfRating; 
         this.numRatings = numRatings;
         this.price = price;
+        this.stock = stock;
+    }
+
+    public int getStock()
+    {
+        return(this.stock);
     }
 
     /**
@@ -35,20 +42,20 @@ public abstract class Movie {
     }
 
     /**
-     * @return - returns title
+     * @return - returns price
      */
     public double getPrice() {
         return this.price;
     }
 
     /**
-     * @return - returns title
+     * @return - returns the addition of ratings
      */
     public double getAdditionOfRating() {
         return this.additionOfRating;
     }
     /**
-     * @return - returns title
+     * @return - returns number of ratings
      */
     public int getNumRatings() {
         return this.numRatings;
@@ -88,21 +95,13 @@ public abstract class Movie {
      */
     public void addRating(double rating)
     {
+        if (rating > 5 || rating < 0.5)
+        {
+            throw new IllegalArgumentException("rating cannot be > 5 or < 05");
+        }
         this.additionOfRating += rating;
         this.numRatings++;
-        this.starRating = this.additionOfRating / this.numRatings;
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (!(o instanceof Movie))
-        {
-            return(false);
-        }
-
-        Movie other = (Movie) o;
-        return(this.title.equals(other.title));
+        this.starRating = Math.round(this.additionOfRating / this.numRatings * 100)/100.0;
     }
     
     /**
@@ -111,20 +110,20 @@ public abstract class Movie {
     @Override
     public String toString()
     {
-        return("Movie Title: " + this.title + ", Genre: " + this.genre + ", Duration: " + this.durationMins + ", Rating: " + this.starRating );
+        return("Movie Title: " + this.title + ", Genre: " + this.genre + ", Duration: " + this.durationMins + "\n \t , Summary: " + this.summary + ", Rating: " + this.starRating + ", Stock: " + this.stock );
 
     }
 
-    public abstract void rentMovie();
-
-    public List<Movie> addMovie(List<Movie> movies)
+    public void rentMovie()
     {
-        if (!(movies.contains(this)))
-        {
-            movies.add(this);
-        }
-        return movies;
+        this.stock = this.stock - 1;
     }
+
+    public void returnMovie()
+    {
+        this.stock = this.stock + 1;
+    }
+
 }
 
 
