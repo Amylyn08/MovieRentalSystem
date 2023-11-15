@@ -9,13 +9,14 @@ public abstract class Movie {
     private double additionOfRating;
     private int numRatings;
     private double price;
+    private int stock;
 
     /**
-     * constructor initializs the Movie fields
+     * constructor initializes the Movie fields
      */
     public Movie(String title, String genre, 
     int durationMins, String summary, double additionOfRating, 
-    int numRatings, double price)
+    int numRatings, double price, int stock)
     {
         this.title = title;
         this.genre = genre; 
@@ -25,6 +26,12 @@ public abstract class Movie {
         this.additionOfRating = additionOfRating; 
         this.numRatings = numRatings;
         this.price = price;
+        this.stock = stock;
+    }
+
+    public int getStock()
+    {
+        return(this.stock);
     }
 
     /**
@@ -103,13 +110,20 @@ public abstract class Movie {
     @Override
     public String toString()
     {
-        return("Movie Title: " + this.title + ", Genre: " + this.genre + ", Duration: " + this.durationMins + ", Rating: " + this.starRating );
+        return("Movie Title: " + this.title + ", Genre: " + this.genre + ", Duration: " + this.durationMins + "\n \t , Summary: " + this.summary + ", Rating: " + this.starRating + ", Stock: " + this.stock );
 
     }
 
-    public abstract void rentMovie();
-    public abstract void returnMovie();
-    public abstract int getStock();
+    public void rentMovie()
+    {
+        this.stock = this.stock - 1;
+    }
+
+    public void returnMovie()
+    {
+        this.stock = this.stock + 1;
+    }
+
 }
 
 

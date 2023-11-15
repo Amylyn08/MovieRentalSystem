@@ -2,7 +2,6 @@ package moviestore;
 
 public class DigitalMovie extends Movie {
     private int fileSize;
-    private int stock;
 
     public DigitalMovie(
     String title, String genre, 
@@ -12,9 +11,8 @@ public class DigitalMovie extends Movie {
     {
         super(title, genre, 
         durationMins, summary, additionOfRating, 
-        numRatings, price);
+        numRatings, price, stock);
         this.fileSize = fileSize;
-        this.stock = stock;
     }
 
     public DigitalMovie(DigitalMovie m)
@@ -22,7 +20,7 @@ public class DigitalMovie extends Movie {
         this(m.getTitle(), m.getGenre(), 
         m.getDurationMins(), m.getSummary(), 
         m.getAdditionOfRating(), 
-        m.getNumRatings(), m.getPrice(), m.fileSize, m.stock);
+        m.getNumRatings(), m.getPrice(), m.fileSize, m.getStock());
     }
 
     /**
@@ -31,27 +29,13 @@ public class DigitalMovie extends Movie {
     @Override
     public String toString()
     {
-        throw new UnsupportedOperationException("not written yet");
+        return super.toString() + ", File size: " + this.fileSize + "kB";
     }
 
-    public int getStock()
-    {
-        return(this.stock);
-    }
 
     public int getFileSize()
     {
         return(this.fileSize);
-    }
-
-    public void rentMovie()
-    {
-        this.stock = this.stock - 1;
-    }
-
-    public void returnMovie()
-    {
-        this.stock = this.stock + 1;
     }
 
     @Override

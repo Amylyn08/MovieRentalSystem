@@ -6,6 +6,7 @@ public class BookRentalSystem{
     //make displayer field -- add later 
     
     private List<Movie> movies;
+    private Displayer methodDisplay;
 
     public BookRentalSystem(List<Movie> movies)
     {
