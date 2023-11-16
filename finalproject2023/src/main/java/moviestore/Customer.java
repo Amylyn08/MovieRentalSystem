@@ -35,15 +35,38 @@ public class Customer {
         return(this.points);
     }
 
+
+    public List<Movie> getRentedMovies()
+    {
+        return(this.rented);
+    }
     /**
      * this method allows the customer to rent a movie 
      * (adds points based on the price of the movie and adds the movie to their list of rented movies)
+     * 
+     * MODIFY TO USE DISCOUNT STRATEGY
      */
-    public void rentMovie(Movie rent)
+    public void rentMovie(Movie rent) //, IDiscountStrategy discountAmount)
     {
-        this.points+= ((int)rent.getPrice()) * 100;
-        rented.add(rent);
+        this.points+= Math.round(rent.getPrice() * 100);
+        if (rent instanceof DigitalMovie)
+            rented.add(new DigitalMovie((DigitalMovie)rent));
+        else if (rent instanceof DVD)
+            rented.add(new DVD((DVD)rent));
     }
+
+    /*
+    private int usePointsForRental(Movie m)
+    {
+        int priceInPoints = (int) m.getPrice() * 1000;
+        if (this.points < priceInPoints)
+        {
+            throw new IllegalArgumentException("not enough points. this action requires " + priceInPoints + " points to be valid.");
+        }
+        this.points = this.points - priceInPoints;
+        return(priceInPoints);
+
+    }*/
 
     /**
      * this method allows the customer to return the movie
