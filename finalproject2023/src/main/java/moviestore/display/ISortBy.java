@@ -1,8 +1,8 @@
 package moviestore.display;
-
+import moviestore.products.*;
 public interface ISortBy {
     /**
      * returns movies sorted by a specific criteria
      */
-    int sortMovies();
+    int compareMovies(Movie a, Movie b);
 }

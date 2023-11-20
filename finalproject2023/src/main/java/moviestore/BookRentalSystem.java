@@ -40,6 +40,44 @@ public class BookRentalSystem{
         this.comparer = newMethod;
     }
 
+    public void selectionSort()
+    {
+        for (int i = 0; i < this.movies.size() - 1; i++) {
+            int index = i;
+            for (int j = i + 1; j < this.movies.size(); j++) {
+                if(this.comparer.compareMovies(movies.get(j), movies.get(index)) < 0) {
+                    index = j;
+                }
+            }
+            swap(i, index);
+        }
+    }
+    /**
+     * This method swaps two objects with two different indexes
+     */
+    private void swap(int i, int index)
+    {
+        Movie temp = this.movies.get(i);
+        this.movies.set(i, this.movies.get(index));
+        this.movies.set(index, temp);
+
+    }
+
+    public List<Movie> filterMovies(String criteria)/// AMYY*************************************
+    {
+        List<Movie> filteredMovies = new ArrayList<Movie>();
+        /**
+         * loop through movies
+         * in filterBy: if movie.criteria = criteria
+         * 
+         */
+
+         return filteredMovies;
+    }
+
+    /**
+     * Lessens the stock when is called for a certain movie.
+     */
     public void rentMovieStock(Movie m)
     {
         if (!this.movies.contains(m))
@@ -50,7 +88,9 @@ public class BookRentalSystem{
         this.movies.get(this.movies.indexOf(m)).rentMovie();
     }
 
-    // addMovie method
+    /**
+     * This method adds a movie to the list of movies. 
+     */
     public void addMovie(Movie m)
     {
         if (this.movies.contains(m))

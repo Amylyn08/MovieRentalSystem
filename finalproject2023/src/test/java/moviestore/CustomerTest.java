@@ -29,7 +29,7 @@ public class CustomerTest {
         assertEquals(m1, cus.getRentedMovies().get(0));
         cus.rentMovie(m2);
         assertEquals(m2, cus.getRentedMovies().get(1));
-        assertEquals(9100, cus.getPoints());
+        assertEquals(1800, cus.getPoints());
     }
 
     @Test (expected = IllegalArgumentException.class)

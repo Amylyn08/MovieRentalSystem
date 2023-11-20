@@ -18,9 +18,9 @@ public class FileLoader implements IDatabase {
      * 
      */
     public List<Movie> loadMovies() throws IOException {
-        Path pMovie = Paths.get("CSVdata\\Movies.csv");
-        Path pDvd = Paths.get("CSVdata\\DVD.csv");
-        Path pDigital = Paths.get("CSVdata\\DigitalMovie.csv");
+        Path pMovie = Paths.get("src\\CSVdata\\Movies.csv");
+        Path pDvd = Paths.get("src\\CSVdata\\DVD.csv");
+        Path pDigital = Paths.get("src\\CSVdata\\DigitalMovie.csv");
         List<String> linesMovie = Files.readAllLines(pMovie);
         List<String> linesDVD = Files.readAllLines(pDvd);
         List<String> linesDigital = Files.readAllLines(pDigital);
