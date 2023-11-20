@@ -40,6 +40,8 @@ public class BookRentalSystem{
         this.comparer = newMethod;
     }
 
+    
+
     public void rentMovieStock(Movie m)
     {
         if (!this.movies.contains(m))
