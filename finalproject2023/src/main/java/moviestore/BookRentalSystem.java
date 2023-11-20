@@ -1,17 +1,18 @@
 package moviestore;
 import java.util.*;
 
-import moviestore.display.Displayer;
 import moviestore.products.DVD;
 import moviestore.products.DigitalMovie;
 import moviestore.products.Movie;
+import moviestore.display.*;
 
 public class BookRentalSystem{
     
     //make displayer field -- add later 
     
     private List<Movie> movies;
-    private Displayer methodDisplay;
+    private ISortBy comparer;
+    private IFilterBy filter;
 
     public BookRentalSystem(List<Movie> movies)
     {
@@ -34,9 +35,9 @@ public class BookRentalSystem{
         return(this.movies);
     }
 
-    public void setDisplayMethod(Displayer newMethod)
+    public void setSorting(ISortBy newMethod)
     {
-        this.methodDisplay = newMethod;
+        this.comparer = newMethod;
     }
 
     public void rentMovieStock(Movie m)
