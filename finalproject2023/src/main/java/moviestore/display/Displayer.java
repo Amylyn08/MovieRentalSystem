@@ -1,5 +1,7 @@
-package moviestore;
+package moviestore.display;
 import java.util.*;
+
+import moviestore.products.Movie;
 
 public abstract class Displayer{
 

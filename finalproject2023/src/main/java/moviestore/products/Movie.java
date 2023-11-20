@@ -1,4 +1,4 @@
-package moviestore;
+package moviestore.products;
 import java.util.*;
 public abstract class Movie {
     private String title;

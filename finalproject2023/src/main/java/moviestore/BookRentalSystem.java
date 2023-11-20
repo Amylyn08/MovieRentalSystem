@@ -1,6 +1,11 @@
 package moviestore;
 import java.util.*;
 
+import moviestore.display.Displayer;
+import moviestore.products.DVD;
+import moviestore.products.DigitalMovie;
+import moviestore.products.Movie;
+
 public class BookRentalSystem{
     
     //make displayer field -- add later 

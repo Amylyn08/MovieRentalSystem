@@ -1,6 +1,11 @@
 package moviestore;
 
 import org.junit.Test;
+
+import moviestore.products.DVD;
+import moviestore.products.DigitalMovie;
+import moviestore.products.Movie;
+
 import static org.junit.Assert.*;
 import java.util.*;
 
