@@ -52,7 +52,9 @@ public class BookRentalSystem{
             swap(i, index);
         }
     }
-
+    /**
+     * This method swaps two objects with two different indexes
+     */
     private void swap(int i, int index)
     {
         Movie temp = this.movies.get(i);
@@ -61,15 +63,21 @@ public class BookRentalSystem{
 
     }
 
-    public List<Movie> filterMovies(String criteria)
+    public List<Movie> filterMovies(String criteria)/// AMYY*************************************
     {
+        List<Movie> filteredMovies = new ArrayList<Movie>();
         /**
          * loop through movies
          * in filterBy: if movie.criteria = criteria
          * 
          */
+
+         return filteredMovies;
     }
 
+    /**
+     * Lessens the stock when is called for a certain movie.
+     */
     public void rentMovieStock(Movie m)
     {
         if (!this.movies.contains(m))
@@ -80,7 +88,9 @@ public class BookRentalSystem{
         this.movies.get(this.movies.indexOf(m)).rentMovie();
     }
 
-    // addMovie method
+    /**
+     * This method adds a movie to the list of movies. 
+     */
     public void addMovie(Movie m)
     {
         if (this.movies.contains(m))
