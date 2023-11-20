@@ -1,12 +1,18 @@
 package moviestore;
 import java.util.*;
 
+import moviestore.products.DVD;
+import moviestore.products.DigitalMovie;
+import moviestore.products.Movie;
+import moviestore.display.*;
+
 public class BookRentalSystem{
     
     //make displayer field -- add later 
     
     private List<Movie> movies;
-    private Displayer methodDisplay;
+    private ISortBy comparer;
+    private IFilterBy filter;
 
     public BookRentalSystem(List<Movie> movies)
     {
@@ -27,6 +33,21 @@ public class BookRentalSystem{
     public List<Movie> getMovies()
     {
         return(this.movies);
+    }
+
+    public void setSorting(ISortBy newMethod)
+    {
+        this.comparer = newMethod;
+    }
+
+    public void rentMovieStock(Movie m)
+    {
+        if (!this.movies.contains(m))
+        {
+            throw new IllegalArgumentException("This movie does not exists in the database!");
+        }
+
+        this.movies.get(this.movies.indexOf(m)).rentMovie();
     }
 
     // addMovie method

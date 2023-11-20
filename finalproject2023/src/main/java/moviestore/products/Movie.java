@@ -1,5 +1,4 @@
-package moviestore;
-
+package moviestore.products;
 import java.util.*;
 
 public abstract class Movie {
@@ -113,8 +112,12 @@ public abstract class Movie {
                 + "\n");
 
     }
-
-    public void rentMovie() {
+    public void rentMovie()
+    {
+        if (this.stock <= 0)
+        {
+            throw new IllegalArgumentException("This movie does not have enough stock in the database!");
+        }
         this.stock = this.stock - 1;
     }
 

@@ -1,9 +1,11 @@
-package moviestore;
-
+package moviestore.loader;
+import moviestore.products.*;
 import java.util.*;
 import java.io.*;
 import java.nio.*;
 import java.nio.file.*;
+
+import moviestore.products.Movie;
 
 public class FileLoader implements IDatabase {
     private List<Movie> movies;
@@ -16,7 +18,7 @@ public class FileLoader implements IDatabase {
      * 
      */
     public List<Movie> loadMovies() throws IOException {
-        Path pMovie = Paths.get("src\\main\\java\\moviestore\\Movies.csv");
+        Path pMovie = Paths.get("CSVdata\\Movies.csv");
         Path pDvd = Paths.get("CSVdata\\DVD.csv");
         Path pDigital = Paths.get("CSVdata\\DigitalMovie.csv");
         List<String> linesMovie = Files.readAllLines(pMovie);

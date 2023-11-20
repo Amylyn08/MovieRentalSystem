@@ -1,5 +1,6 @@
 package moviestore;
-
+import moviestore.loader.*;
+import moviestore.products.*;
 import java.util.*;
 import java.io.*;
 import java.nio.*;

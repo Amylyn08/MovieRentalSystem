@@ -1,4 +1,4 @@
-package moviestore;
+package moviestore.products;
 
 public class DVD extends Movie {
 
