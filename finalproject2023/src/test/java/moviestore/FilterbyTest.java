@@ -4,6 +4,7 @@ import moviestore.display.FilterByAvailable;
 import moviestore.display.FilterByGenre;
 import moviestore.display.FilterByTitle;
 import moviestore.display.IFilterBy;
+import moviestore.exceptions.LoaderFailedException;
 import moviestore.loader.FileLoader;
 import static org.junit.Assert.*;
 import java.util.*;
@@ -14,7 +15,7 @@ import org.junit.Test;
 public class FilterbyTest {
     
     @Test
-    public void checkFilterByTitle() throws IOException{
+    public void checkFilterByTitle() throws LoaderFailedException{
         FileLoader loader = new FileLoader();
         List<Movie> movies = loader.loadMovies();
         IFilterBy filter = new FilterByTitle();
@@ -29,7 +30,7 @@ public class FilterbyTest {
     }
 
     @Test
-    public void checkFilterByGenre() throws IOException{
+    public void checkFilterByGenre() throws LoaderFailedException{
         FileLoader loader = new FileLoader();
         List<Movie> movies = loader.loadMovies();
         IFilterBy filter = new FilterByGenre();
@@ -45,7 +46,7 @@ public class FilterbyTest {
     }
 
     @Test
-    public void checkFilterByAvailability() throws IOException{
+    public void checkFilterByAvailability() throws LoaderFailedException{
         FileLoader loader = new FileLoader();
         List<Movie> movies = loader.loadMovies();
         IFilterBy filter = new FilterByAvailable();
