@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "AppforTesting",
+            "request": "launch",
+            "mainClass": "moviestore.AppforTesting",
+            "projectName": "finalproject2023"
+        },
+        {
+            "liveServer.settings.AdvanceCustomBrowserCmdLine": "chrome"
+        }
+    ]
+}
