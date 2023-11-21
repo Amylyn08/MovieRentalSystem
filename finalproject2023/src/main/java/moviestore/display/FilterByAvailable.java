@@ -5,6 +5,12 @@ import moviestore.products.Movie;
 
 public class FilterByAvailable implements IFilterBy {
 
+    /**
+     * This function checks if the movie corresponding to the criteria, i.e. title, has enough stock.
+     * @param criteria - What the function is filtering by I.E. the title
+     * @param movies - the list of movies the function is working in.
+     * @return - returns the filtered list version of the movies.
+     */
     @Override
     public List<Movie> filterMovies(String criteria, List<Movie> movies){
         List<Movie> filteredMovies = new ArrayList<Movie>();
