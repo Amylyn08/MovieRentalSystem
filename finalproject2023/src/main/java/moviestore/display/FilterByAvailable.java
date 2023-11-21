@@ -1,5 +1,25 @@
 package moviestore.display;
+import java.util.*;
 
-public class FilterByAvailable {
-    
+import moviestore.products.Movie;
+
+public class FilterByAvailable implements IFilterBy {
+
+    /**
+     * This function checks if the movie corresponding to the criteria, i.e. title, has enough stock.
+     * @param criteria - What the function is filtering by I.E. the title
+     * @param movies - the list of movies the function is working in.
+     * @return - returns the filtered list version of the movies.
+     */
+    @Override
+    public List<Movie> filterMovies(String criteria, List<Movie> movies){
+        List<Movie> filteredMovies = new ArrayList<Movie>();
+        for(Movie m : movies){
+            if(m.getTitle().contains(criteria) && m.getStock() > 0){
+                filteredMovies.add(m);
+            }
+        }
+        return filteredMovies;
+    }
+
 }
