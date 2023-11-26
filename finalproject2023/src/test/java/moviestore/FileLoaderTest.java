@@ -1,4 +1,5 @@
 package moviestore;
+import moviestore.exceptions.LoaderFailedException;
 import moviestore.loader.*;
 import moviestore.products.*;
 import java.io.*;
@@ -11,7 +12,7 @@ import java.util.*;
 public class FileLoaderTest {
 
     @Test
-    public void testRightDigital() throws IOException {
+    public void testRightDigital() throws LoaderFailedException {
         Movie digitalMovie = new DigitalMovie("The Lost City", "Action-Adventure", 145,
                 "An archeological expedition races against a rival group to uncover a lost city's secrets.", 240, 55,
                 40.50, 1800, 2);
@@ -22,7 +23,7 @@ public class FileLoaderTest {
     }
 
     @Test
-    public void testRightDVD() throws IOException {
+    public void testRightDVD() throws LoaderFailedException {
         Movie dvdMovie = new DVD("The Lost City", "Action-Adventure", 145,
                 "An archeological expedition races against a rival group to uncover a lost city's secrets.", 240, 55,
                 40.50, 3);
