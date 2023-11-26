@@ -8,8 +8,8 @@ public interface IDiscountStrategy {
 }
 
 /*
- * 5$ => 10000
- * 10$ 15000
- * 20$ 25000
- * 50$ 100000
+ * 5$ => 10000 points deducted
+ * 10$ 15000 points deducted
+ * 20$ 25000 points deducted
+ * 50$ 100000 points deducted
  */
