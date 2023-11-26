@@ -11,11 +11,8 @@ DROP TABLE Stores;
 DROP TABLE DVDs;
 DROP TABLE DigitalMovies;
 DROP TABLE MOVIES;
+DROP TABLE Moviestore_Customers;
 DROP TABLE Products;
-DROP TABLE Loglogins;
-DROP TABLE Logwarehousemodification;
-DROP TABLE Logordermodification;
-DROP TABLE Logreviewmodification;
 
 CREATE TABLE Stores(
     storeID NUMBER(2) GENERATED ALWAYS AS IDENTITY CONSTRAINT store_pk PRIMARY KEY,
@@ -65,11 +62,6 @@ CREATE TABLE Customers(
     country          VARCHAR2(40)
 );
 
-CREATE TABLE MovieStore_Customers(
-    customerName    VARCHAR(100),
-    points          NUMBER(10)
-);
-
 CREATE TABLE Orders(
     orderID         NUMBER(2)   GENERATED ALWAYS AS IDENTITY CONSTRAINT orders_pk PRIMARY KEY,
     customerID      NUMBER(2)   REFERENCES Customers(customerID) ON DELETE CASCADE NOT NULL,
@@ -87,40 +79,14 @@ CREATE TABLE Reviews(
     reviewID        NUMBER(2)   GENERATED ALWAYS AS IDENTITY CONSTRAINT reviews_pk PRIMARY KEY,
     productID       NUMBER(2)   REFERENCES Products(productID) ON DELETE CASCADE NOT NULL,
 	customerID  	NUMBER(2) 	REFERENCES Customers(customerID) ON DELETE CASCADE NOT NULL,
-    star            NUMBER(1),
+    star            NUMBER(2, 1),
     flagNums        NUMBER(1),
     description     VARCHAR2(100)
 );
 
-CREATE TABLE LogOrderModification(
-    orderID             NUMBER(2)       NOT NULL,
-    customerID          NUMBER(2)       NOT NULL,
-    storeID             NUMBER(2)       NOT NULL,
-    modificationDate    DATE            NOT NULL,
-    modificationType    VARCHAR2(20)    NOT NULL
-);
-
-CREATE TABLE LogReviewModification(
-    reviewID            NUMBER(2)       NOT NULL,
-    productID           NUMBER(2)       NOT NULL,
-	customerID  	    NUMBER(2)       NOT NULL,
-    star                NUMBER(1),
-    flagNums            NUMBER(1),
-    description         VARCHAR2(100),
-    modificationDate    DATE            NOT NULL,
-    modificationType    VARCHAR2(20)    NOT NULL
-);
-CREATE TABLE Loglogins(
-    username        VARCHAR2(20) NOT NULL,
-    datelogged      DATE         NOT NULL
-);
-
-CREATE TABLE LogWarehouseModification(
-    warehouseid     NUMBER(2)   NOT NULL,
-    productid       NUMBER(2)   NOT NULL,
-    quantity        NUMBER(6)   NOT NULL,
-    modificationDate    DATE    NOT NULL,
-    modificationType    VARCHAR2(20) NOT NULL
+CREATE TABLE MovieStore_Customers(
+    customerName    VARCHAR(100),
+    points          NUMBER(10)
 );
 
 CREATE TABLE Movies (
@@ -145,31 +111,11 @@ CREATE TABLE DigitalMovies(
     fileSize NUMBER(4) NOT NULL,
     stock   NUMBER(3) NOT NULL
 );
+
 /
 
 
 /** inserts **/
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('John Doe', 1500);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Jane Smith', 1200);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('David Johnson', 900);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Emily Davis', 1100);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Michael Wilson', 1350);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Susan Brown', 1000);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Robert Miller', 800);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Olivia Jones', 950);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('William Taylor', 1200);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Emma Anderson', 1050);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Christopher Martinez', 1300);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Ava Jackson', 850);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Brian White', 1100);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Sophia Harris', 1250);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Matthew Clark', 900);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Alice Thomas', 1400);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Andrew Robinson', 1150);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Grace Lee', 950);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Daniel Walker', 1050);
-INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Ella Hall', 1250);
-
 INSERT INTO Stores (name) 
 VALUES ('marche adonis');
 INSERT INTO Stores (name) 
@@ -225,26 +171,6 @@ INSERT INTO Products (name, category) VALUES ('PS5', 'Electronics');
 INSERT INTO Products (name, category) VALUES ('pasta', 'Grocery');
 INSERT INTO Products (name, category) VALUES ('tomato', 'Grocery');
 INSERT INTO Products (name, category) VALUES ('Train X745', 'Vehicle');
-INSERT INTO Products (name, category) VALUES ('The Lost City', 'Movies');
-INSERT INTO Products (name, category) VALUES ('Infinite Horizons', 'Movies');
-INSERT INTO Products (name, category) VALUES ('Summer Breeze', 'Movies');
-INSERT INTO Products (name, category) VALUES ('Eclipse of Shadows', 'Movies');
-INSERT INTO Products (name, category) VALUES ('Magic Moments', 'Movies');
-INSERT INTO Products (name, category) VALUES ('Silent Whispers', 'Movies');
-INSERT INTO Products (name, category) VALUES ('The Cosmic Heist', 'Movies');
-INSERT INTO Products (name, category) VALUES ('The Haunting Melody', 'Movies');
-INSERT INTO Products (name, category) VALUES ('Flight of Fantasy', 'Movies');
-INSERT INTO Products (name, category) VALUES ('High Stakes', 'Movies');
-INSERT INTO Products (name, category) VALUES ('The Comedy Conundrum', 'Movies');
-INSERT INTO Products (name, category) VALUES ('Parallel Realities', 'Movies');
-INSERT INTO Products (name, category) VALUES ('Interstellar', 'Movies');
-INSERT INTO Products (name, category) VALUES ('The Old Guard', 'Movies');
-INSERT INTO Products (name, category) VALUES ('White Chicks', 'Movies');
-INSERT INTO Products (name, category) VALUES ('The Grudge', 'Movies');
-INSERT INTO Products (name, category) VALUES ('21 Jump Street', 'Movies');
-INSERT INTO Products (name, category) VALUES ('The Hangover', 'Movies');
-INSERT INTO Products (name, category) VALUES ('Game Night', 'Movies');
-INSERT INTO Products (name, category) VALUES ('Elf', 'Movies');
 
 INSERT INTO Warehouses_Products (warehouseID, productID, quantity) VALUES (1, 1, 1000);
 INSERT INTO Warehouses_Products (warehouseID, productID, quantity) VALUES (2, 2, 24980);
@@ -432,6 +358,48 @@ INSERT INTO Reviews (star, flagNums, description, productID, customerID)
 VALUES (1, 2, 'Worse car I have driven!', 7, 13);
 INSERT INTO Reviews (star, flagNums, description, productID, customerID)
 VALUES (4, 0, NULL, 15, 12);
+
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('John Doe', 1500);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Jane Smith', 1200);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('David Johnson', 900);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Emily Davis', 1100);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Michael Wilson', 1350);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Susan Brown', 1000);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Robert Miller', 800);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Olivia Jones', 950);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('William Taylor', 1200);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Emma Anderson', 1050);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Christopher Martinez', 1300);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Ava Jackson', 850);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Brian White', 1100);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Sophia Harris', 1250);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Matthew Clark', 900);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Alice Thomas', 1400);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Andrew Robinson', 1150);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Grace Lee', 950);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Daniel Walker', 1050);
+INSERT INTO MovieStore_Customers (customerName, points) VALUES ('Ella Hall', 1250);
+
+INSERT INTO Products (name, category) VALUES ('The Lost City', 'Movies');
+INSERT INTO Products (name, category) VALUES ('Infinite Horizons', 'Movies');
+INSERT INTO Products (name, category) VALUES ('Summer Breeze', 'Movies');
+INSERT INTO Products (name, category) VALUES ('Eclipse of Shadows', 'Movies');
+INSERT INTO Products (name, category) VALUES ('Magic Moments', 'Movies');
+INSERT INTO Products (name, category) VALUES ('Silent Whispers', 'Movies');
+INSERT INTO Products (name, category) VALUES ('The Cosmic Heist', 'Movies');
+INSERT INTO Products (name, category) VALUES ('The Haunting Melody', 'Movies');
+INSERT INTO Products (name, category) VALUES ('Flight of Fantasy', 'Movies');
+INSERT INTO Products (name, category) VALUES ('High Stakes', 'Movies');
+INSERT INTO Products (name, category) VALUES ('The Comedy Conundrum', 'Movies');
+INSERT INTO Products (name, category) VALUES ('Parallel Realities', 'Movies');
+INSERT INTO Products (name, category) VALUES ('Interstellar', 'Movies');
+INSERT INTO Products (name, category) VALUES ('The Old Guard', 'Movies');
+INSERT INTO Products (name, category) VALUES ('White Chicks', 'Movies');
+INSERT INTO Products (name, category) VALUES ('The Grudge', 'Movies');
+INSERT INTO Products (name, category) VALUES ('21 Jump Street', 'Movies');
+INSERT INTO Products (name, category) VALUES ('The Hangover', 'Movies');
+INSERT INTO Products (name, category) VALUES ('Game Night', 'Movies');
+INSERT INTO Products (name, category) VALUES ('Elf', 'Movies');
 
 INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
 VALUES ('The Lost City', 'Action-Adventure', 145, 'An archeological expedition races against a rival group to uncover a lost city''s secrets.', 240, 55, 40.50, 18);

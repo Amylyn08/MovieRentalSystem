@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 import moviestore.products.*;
+import moviestore.Customer;
 import moviestore.exceptions.LoaderFailedException;
 
 
@@ -97,6 +98,30 @@ public class SQLLoader implements IDatabase
             }
 
             return(movies);
+        }
+        catch (SQLException e)
+        {
+            throw new LoaderFailedException(e);
+        }
+    }
+
+    public List<Customer> loadCustomers() throws LoaderFailedException
+    {
+        try{
+            List<Customer> customers = new ArrayList<Customer>();
+            String getCustomers = "SELECT * FROM Moviestore_Customers";
+            Statement stmt = this.conn.createStatement();
+            ResultSet rs = stmt.executeQuery(getCustomers);
+            while(rs.next())
+            {
+                customers.add(new Customer(
+                    rs.getString("customerName"),
+                    rs.getInt("points")
+                )
+                );
+            }
+
+            return(customers);
         }
         catch (SQLException e)
         {
