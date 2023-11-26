@@ -80,6 +80,9 @@ public class Customer {
     }
 
     public void deductPoints(int points) {
+        if (this.points < points) {
+            throw new IllegalArgumentException("Customer does not have enough points!");
+        }
         this.points -= points;
     }
 
