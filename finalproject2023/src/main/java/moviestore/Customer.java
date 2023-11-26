@@ -22,6 +22,18 @@ public class Customer {
         this.rented = new ArrayList<Movie>();
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (!(o instanceof Customer))
+        {
+            return false;
+        }
+
+        Customer other = (Customer) o;
+        return(this.name.equals(other.name) && this.points == other.points);
+    }
+
     /**
      * @return - returns name
      */

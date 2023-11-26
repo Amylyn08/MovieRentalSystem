@@ -19,4 +19,14 @@ public class SQLLoaderTest {
         assertTrue(dvdMovie.equals(loadedMovies.get(0)));
         assertTrue(digitalMovie.equals(loadedMovies.get(loadedMovies.size() - 1)));
     }
+
+    @Test
+    public void testGetCustomers() throws LoaderFailedException{
+        Customer first = new Customer("John Doe", 1500);
+        Customer last = new Customer("Ella Hall",1250);
+        SQLLoader loader = new SQLLoader("A2233420", "KimNamjoon2021");
+        List<Customer> loadedCustomers = loader.loadCustomers();
+        assertTrue(first.equals(loadedCustomers.get(0)));
+        assertTrue(last.equals(loadedCustomers.get(loadedCustomers.size() - 1)));
+    }
 }
