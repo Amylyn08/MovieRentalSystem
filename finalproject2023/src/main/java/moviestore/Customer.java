@@ -53,9 +53,8 @@ public class Customer {
     /**
      * this method returns the movies the customer has rented
      */
-    public List<Movie> getRentedMovies()
-    {
-        return(this.rented);
+    public List<Movie> getRentedMovies() {
+        return (this.rented);
     }
 
     /**
@@ -70,6 +69,7 @@ public class Customer {
 
     /**
      * this method returns a movie th customer has rented
+     * 
      * @param rent - represents a movie they want to rent
      */
     public void returnMovie(Movie rent) {
@@ -78,4 +78,14 @@ public class Customer {
         }
         this.rented.remove(this.rented.indexOf(rent));
     }
+
+    public void deductPoints(int points) {
+        this.points -= points;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer name: " + this.name + ", Points: " + this.points;
+    }
+
 }
