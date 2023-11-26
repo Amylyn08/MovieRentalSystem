@@ -483,3 +483,5 @@ INSERT INTO DigitalMovies (movieID, fileSize, stock) VALUES (17, 1700, 2);
 INSERT INTO DigitalMovies (movieID, fileSize, stock) VALUES (18, 1900, 8);
 INSERT INTO DigitalMovies (movieID, fileSize, stock) VALUES (19, 2050, 3);
 INSERT INTO DigitalMovies (movieID, fileSize, stock) VALUES (20, 1800, 2);
+
+DROP TABLE Stores_Products;
