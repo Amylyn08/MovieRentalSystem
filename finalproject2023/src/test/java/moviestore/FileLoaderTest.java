@@ -32,6 +32,9 @@ public class FileLoaderTest {
 
     @Test
     public void testCustomer() throws LoaderFailedException {
-        Customer cus = new Customer(null, 0);
+        Customer cus = new Customer("Christopher Martinez", 1300);
+        FileLoader loader = new FileLoader();
+        List<Customer> loadedCustomers = loader.loadCustomers();
+        assertTrue(cus.equals(loadedCustomers.get(10)));
     }
 }
