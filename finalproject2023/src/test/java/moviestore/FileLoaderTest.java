@@ -1,4 +1,5 @@
 package moviestore;
+
 import moviestore.exceptions.LoaderFailedException;
 import moviestore.loader.*;
 import moviestore.products.*;
@@ -27,5 +28,10 @@ public class FileLoaderTest {
         Movie dvdMovie = new DVD("The Lost City", "Action-Adventure", 145,
                 "An archeological expedition races against a rival group to uncover a lost city's secrets.", 240, 55,
                 40.50, 3);
+    }
+
+    @Test
+    public void testCustomer() throws LoaderFailedException {
+        Customer cus = new Customer(null, 0);
     }
 }

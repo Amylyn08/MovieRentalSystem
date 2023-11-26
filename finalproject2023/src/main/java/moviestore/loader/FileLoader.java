@@ -1,4 +1,6 @@
 package moviestore.loader;
+
+import moviestore.Customer;
 import moviestore.exceptions.LoaderFailedException;
 import moviestore.products.*;
 import java.util.*;
@@ -17,8 +19,7 @@ public class FileLoader implements IDatabase {
      * 
      */
     public List<Movie> loadMovies() throws LoaderFailedException {
-        try
-        {
+        try {
             Path pMovie = Paths.get("src\\CSVdata\\Movies.csv");
             Path pDvd = Paths.get("src\\CSVdata\\DVD.csv");
             Path pDigital = Paths.get("src\\CSVdata\\DigitalMovie.csv");
@@ -30,18 +31,34 @@ public class FileLoader implements IDatabase {
                 String[] dataMovie = linesMovie.get(i).split(",");
                 String[] dataDigital = linesDigital.get(i).split(",");
                 String[] dataDVD = linesDVD.get(i).split(",");
-                loadMovies.add(new DigitalMovie(dataMovie[1], dataMovie[2], Integer.parseInt(dataMovie[3]), dataMovie[4],
-                        Double.parseDouble(dataMovie[5]), Integer.parseInt(dataMovie[6]), Double.parseDouble(dataMovie[7]),
-                        Integer.parseInt(dataDigital[1]), Integer.parseInt(dataDigital[2])));
+                loadMovies
+                        .add(new DigitalMovie(dataMovie[1], dataMovie[2], Integer.parseInt(dataMovie[3]), dataMovie[4],
+                                Double.parseDouble(dataMovie[5]), Integer.parseInt(dataMovie[6]),
+                                Double.parseDouble(dataMovie[7]),
+                                Integer.parseInt(dataDigital[1]), Integer.parseInt(dataDigital[2])));
 
                 loadMovies.add(new DVD(dataMovie[1], dataMovie[2], Integer.parseInt(dataMovie[3]), dataMovie[4],
-                        Double.parseDouble(dataMovie[5]), Integer.parseInt(dataMovie[6]), Double.parseDouble(dataMovie[7]),
+                        Double.parseDouble(dataMovie[5]), Integer.parseInt(dataMovie[6]),
+                        Double.parseDouble(dataMovie[7]),
                         Integer.parseInt(dataDVD[1])));
             }
             return loadMovies;
+        } catch (IOException e) {
+            throw new LoaderFailedException(e);
         }
-        catch (IOException e)
-        {
+    }
+
+    public List<Customer> loadCustomers() throws LoaderFailedException {
+        try {
+            Path p = Paths.get("src\\CSVdata\\Customers.csv");
+            List<String> customerLines = Files.readAllLines(p);
+            List<Customer> loadedCustomers = new ArrayList<Customer>();
+            for (String line : customerLines) {
+                String[] data = line.split(",");
+                loadedCustomers.add(new Customer(data[1], Integer.parseInt(data[0])));
+            }
+            return loadedCustomers;
+        } catch (IOException e) {
             throw new LoaderFailedException(e);
         }
     }
