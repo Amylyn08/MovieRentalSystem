@@ -1,5 +1,7 @@
 package moviestore;
 
+import moviestore.discounts.FiftyDollarDiscount;
+import moviestore.discounts.IDiscountStrategy;
 import moviestore.exceptions.LoaderFailedException;
 import moviestore.loader.*;
 import moviestore.products.*;
@@ -11,16 +13,11 @@ import java.sql.*;
 
 public class AppforTesting {
     public static void main(String[] args) throws LoaderFailedException, SQLException {
-        // SQLLoader loader = new SQLLoader("A2233420", "KimNamjoon2021");
         FileLoader loader = new FileLoader();
-        // List<Movie> movies = loader.loadMovies();
-        // for (Movie m : movies)
-        // {
-        // System.out.println(m);
-        // }
-        List<Customer> cus = loader.loadCustomers();
-        for (Customer c : cus) {
-            System.out.println(c);
-        }
+        IDiscountStrategy discount = new FiftyDollarDiscount();
+        List<Movie> movies = loader.loadMovies();
+        Customer cus = new Customer("Tester customer", 120000);
+        System.out.println(movies.get(33));
+
     }
 }

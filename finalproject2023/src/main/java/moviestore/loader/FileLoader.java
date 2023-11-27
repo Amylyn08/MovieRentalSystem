@@ -9,14 +9,15 @@ import java.nio.*;
 import java.nio.file.*;
 
 public class FileLoader implements IDatabase {
-    private List<Movie> movies;
-
-    public FileLoader() {
-        this.movies = new ArrayList<Movie>();
-    }
 
     /**
+     * Loads all movies from csv files containing Movies, DVDS, and Digitals, and
+     * returns a list
+     * of all movies together.
      * 
+     * @return - returns a list of movies.
+     * @throws LoaderFailedException - may throw an error if there is an
+     *                               IOException.
      */
     public List<Movie> loadMovies() throws LoaderFailedException {
         try {
@@ -48,6 +49,13 @@ public class FileLoader implements IDatabase {
         }
     }
 
+    /**
+     * Creates a list of customers from customers.csv
+     * 
+     * @returns - a list of customers.
+     * @throws LoaderFailedException - may throw an error if there is an
+     *                               IOException.
+     */
     public List<Customer> loadCustomers() throws LoaderFailedException {
         try {
             Path p = Paths.get("src\\CSVdata\\Customers.csv");
