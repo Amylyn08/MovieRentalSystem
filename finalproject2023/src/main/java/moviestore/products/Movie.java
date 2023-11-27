@@ -1,4 +1,8 @@
 package moviestore.products;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 public abstract class Movie {
@@ -11,13 +15,14 @@ public abstract class Movie {
     private int numRatings;
     private double price;
     private int stock;
+    private String URL;
 
     /**
      * constructor initializes the Movie fields
      */
     public Movie(String title, String genre,
             int durationMins, String summary, double additionOfRating,
-            int numRatings, double price, int stock) {
+            int numRatings, double price, int stock, String URL) {
         this.title = title;
         this.genre = genre;
         this.durationMins = durationMins;
@@ -27,6 +32,7 @@ public abstract class Movie {
         this.numRatings = numRatings;
         this.price = price;
         this.stock = stock;
+        this.URL = URL;
     }
 
     public int getStock() {
@@ -59,6 +65,10 @@ public abstract class Movie {
      */
     public int getNumRatings() {
         return this.numRatings;
+    }
+
+    public String getURL(){
+        return this.URL;
     }
 
     /**
@@ -123,6 +133,21 @@ public abstract class Movie {
 
     public void returnMovie() {
         this.stock = this.stock + 1;
+    }
+
+    public void playTrailer(){
+        if(Desktop.isDesktopSupported()){
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                desktop.browse(new URI(this.URL));
+            } catch (IOException | URISyntaxException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        else{
+            System.out.println("Unable to play move. Here is the URL: "+this.URL);
+        }
     }
 
 }

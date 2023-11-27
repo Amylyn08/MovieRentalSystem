@@ -13,11 +13,11 @@ import java.sql.*;
 
 public class AppforTesting {
     public static void main(String[] args) throws LoaderFailedException, SQLException {
+        Scanner scan = new Scanner(System.in);
         FileLoader loader = new FileLoader();
-        IDiscountStrategy discount = new FiftyDollarDiscount();
         List<Movie> movies = loader.loadMovies();
-        Customer cus = new Customer("Tester customer", 120000);
-        System.out.println(movies.get(33));
-
+        System.out.println("Press 1 to play trailer for movie");
+        int input = Integer.parseInt(scan.nextLine());
+        if(input == 1) {movies.get(8).playTrailer();}
     }
 }

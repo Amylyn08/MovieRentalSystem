@@ -5,6 +5,13 @@
             "name": "AppforTesting",
             "request": "launch",
             "mainClass": "moviestore.AppforTesting",
+            "projectName": "assignment5"
+        },
+        {
+            "type": "java",
+            "name": "AppforTesting",
+            "request": "launch",
+            "mainClass": "moviestore.AppforTesting",
             "projectName": "finalproject2023"
         },
         {

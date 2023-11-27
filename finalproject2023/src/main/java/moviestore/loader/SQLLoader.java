@@ -66,7 +66,8 @@ public class SQLLoader implements IDatabase {
                         rs.getDouble("additionOfRatings"),
                         rs.getInt("numRatings"),
                         rs.getDouble("price"),
-                        rs.getInt("stock")));
+                        rs.getInt("stock"),
+                        rs.getString("URL")));
             }
             System.out.println("loaded");
 
@@ -83,7 +84,8 @@ public class SQLLoader implements IDatabase {
                         rs.getInt("numRatings"),
                         rs.getDouble("price"),
                         rs.getInt("fileSize"),
-                        rs.getInt("stock")));
+                        rs.getInt("stock"),
+                        rs.getString("URL")));
             }
 
             return (movies);
