@@ -88,7 +88,7 @@ public class BookRentalSystem{
     /**
      * Lessens the stock when is called for a certain movie.
      */
-    public void rentMovieStock(Movie m)
+    public void rentMovie(Movie m)
     {
         if (!this.movies.contains(m))
         {
@@ -101,7 +101,7 @@ public class BookRentalSystem{
     /**
      * increments the stock when is called for a certain movie.
      */
-    public void returnMovieStock(Movie m)
+    public void returnMovie(Movie m)
     {
         if (!this.movies.contains(m))
         {

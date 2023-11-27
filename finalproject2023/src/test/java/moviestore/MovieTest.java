@@ -141,7 +141,7 @@ public class MovieTest {
         movies.add(new DVD("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         movies.add(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         BookRentalSystem moviesToRent = new BookRentalSystem(movies);
-        moviesToRent.rentMovieStock(movies.get(0));
+        moviesToRent.rentMovie(movies.get(0));
         assertEquals(4, moviesToRent.getMovies().get(0).getStock());
     }
 
@@ -153,7 +153,7 @@ public class MovieTest {
         movies.add(new DVD("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         movies.add(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         BookRentalSystem moviesToRent = new BookRentalSystem(movies);
-        moviesToRent.rentMovieStock(movies.get(0));
+        moviesToRent.rentMovie(movies.get(0));
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -164,7 +164,7 @@ public class MovieTest {
         movies.add(new DVD("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         movies.add(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         BookRentalSystem moviesToRent = new BookRentalSystem(movies);
-        moviesToRent.rentMovieStock(new DigitalMovie("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 1000, 5));
+        moviesToRent.rentMovie(new DigitalMovie("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 1000, 5));
     }
 
 }
