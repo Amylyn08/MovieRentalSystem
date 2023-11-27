@@ -5,6 +5,13 @@
             "name": "Employee",
             "request": "launch",
             "mainClass": "moviestore.Employee",
+            "projectName": "assignment5"
+        },
+        {
+            "type": "java",
+            "name": "Employee",
+            "request": "launch",
+            "mainClass": "moviestore.Employee",
             "projectName": "finalproject2023"
         },
         {

@@ -40,6 +40,16 @@ public class BookRentalSystem{
         this.comparer = newMethod;
     }
 
+    public void setFilter(IFilterBy newMethod)
+    {
+        this.filter = newMethod;
+    }
+
+    public IFilterBy getFilter()
+    {
+        return(this.filter);
+    }
+
     public void selectionSort()
     {
         for (int i = 0; i < this.movies.size() - 1; i++) {
@@ -89,6 +99,19 @@ public class BookRentalSystem{
     }
 
     /**
+     * increments the stock when is called for a certain movie.
+     */
+    public void returnMovieStock(Movie m)
+    {
+        if (!this.movies.contains(m))
+        {
+            throw new IllegalArgumentException("This movie does not exists in the database!");
+        }
+
+        this.movies.get(this.movies.indexOf(m)).returnMovie();
+    }
+
+    /**
      * This method adds a movie to the list of movies. 
      */
     public void addMovie(Movie m)
@@ -103,6 +126,20 @@ public class BookRentalSystem{
         }
     }
 
-
+    public Movie findMovie(String title, String medium)
+    {
+        for (Movie m : this.movies)
+        {
+            if (medium == "digital" && m instanceof DigitalMovie && m.getTitle().toLowerCase().equals(title))
+            {
+                return (m);
+            }
+            else if (medium == "dvd" && m instanceof DVD && m.getTitle().toLowerCase().equals(title))
+            {
+                return(m);
+            }
+        }
+        throw new IllegalArgumentException("this movie does not exist in our database!");
+    }
 
 }
