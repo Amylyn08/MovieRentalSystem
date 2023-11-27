@@ -2,9 +2,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "AppforTesting",
+            "name": "Employee",
             "request": "launch",
-            "mainClass": "moviestore.AppforTesting",
+            "mainClass": "moviestore.Employee",
             "projectName": "finalproject2023"
         },
         {
