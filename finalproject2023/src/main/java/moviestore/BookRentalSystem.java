@@ -11,10 +11,11 @@ public class BookRentalSystem{
     //make displayer field -- add later 
     
     private List<Movie> movies;
+    private List<Customer> customers;
     private ISortBy comparer;
     private IFilterBy filter;
 
-    public BookRentalSystem(List<Movie> movies)
+    public BookRentalSystem(List<Movie> movies, List<Customer> customers)
     {
         this.movies = new ArrayList<Movie>();
         for(Movie m : movies)
@@ -28,6 +29,17 @@ public class BookRentalSystem{
                 this.movies.add(new DigitalMovie((DigitalMovie)m));
             }
         }
+
+        this.customers = new ArrayList<Customer>();
+        for(Customer c : customers)
+        {
+            this.customers.add(new Customer(c));
+        }
+    }
+
+    public List<Customer> getCustomers()
+    {
+        return(this.customers);
     }
 
     public List<Movie> getMovies()

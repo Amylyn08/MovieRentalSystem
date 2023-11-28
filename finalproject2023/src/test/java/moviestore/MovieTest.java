@@ -111,7 +111,7 @@ public class MovieTest {
         movies.add(new DigitalMovie("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 1000, 5));
         movies.add(new DVD("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
 
-        BookRentalSystem moviesToAddTo = new BookRentalSystem(movies);
+        BookRentalSystem moviesToAddTo = new BookRentalSystem(movies, new ArrayList<Customer>());
         moviesToAddTo.addMovie(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
 
         movies.add(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
@@ -126,7 +126,7 @@ public class MovieTest {
         movies.add(new DigitalMovie("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 1000, 5));
         movies.add(new DVD("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
 
-        BookRentalSystem moviesToAddTo = new BookRentalSystem(movies);
+        BookRentalSystem moviesToAddTo = new BookRentalSystem(movies, new ArrayList<Customer>());
         moviesToAddTo.addMovie(new DVD("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
 
         movies.add(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
@@ -140,7 +140,7 @@ public class MovieTest {
         movies.add(new DigitalMovie("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 1000, 5));
         movies.add(new DVD("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         movies.add(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
-        BookRentalSystem moviesToRent = new BookRentalSystem(movies);
+        BookRentalSystem moviesToRent = new BookRentalSystem(movies, new ArrayList<Customer>());
         moviesToRent.rentMovie(movies.get(0));
         assertEquals(4, moviesToRent.getMovies().get(0).getStock());
     }
@@ -152,7 +152,7 @@ public class MovieTest {
         movies.add(new DigitalMovie("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 1000, 0));
         movies.add(new DVD("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         movies.add(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
-        BookRentalSystem moviesToRent = new BookRentalSystem(movies);
+        BookRentalSystem moviesToRent = new BookRentalSystem(movies, new ArrayList<Customer>());
         moviesToRent.rentMovie(movies.get(0));
     }
 
@@ -163,7 +163,7 @@ public class MovieTest {
         movies.add(new DigitalMovie("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 1000, 5));
         movies.add(new DVD("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         movies.add(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
-        BookRentalSystem moviesToRent = new BookRentalSystem(movies);
+        BookRentalSystem moviesToRent = new BookRentalSystem(movies, new ArrayList<Customer>());
         moviesToRent.rentMovie(new DigitalMovie("The Found City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 1000, 5));
     }
 

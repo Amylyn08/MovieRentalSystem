@@ -19,6 +19,14 @@ public class Customer {
         this.rented = new ArrayList<Movie>();
     }
 
+    /**
+     * copy constructor for Customer class
+     */
+    public Customer(Customer other)
+    {
+        this(other.name, other.points);
+    }
+
     @Override
     public boolean equals(Object o)
     {
