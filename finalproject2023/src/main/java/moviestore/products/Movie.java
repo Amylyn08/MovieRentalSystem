@@ -9,7 +9,7 @@ import java.net.URISyntaxException;
  * The `Movie` class represents a generic movie with various attributes,
  * with relevant methods to manipulate the atrributes of a Movie object  
  */
-public abstract class Movie {
+public class Movie {
     private String title;
     private String genre;
     private int durationMins;

@@ -5,7 +5,6 @@ import moviestore.exceptions.LoaderFailedException;
 import moviestore.loader.SQLLoader;
 import static org.junit.Assert.*;
 import java.util.*;
-import java.io.*;
 
 import org.junit.Test;
 

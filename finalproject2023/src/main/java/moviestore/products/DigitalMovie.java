@@ -1,5 +1,9 @@
 package moviestore.products;
 
+/**
+ * DigitalMovie class representing the digital representation of a movie.
+ * Extending class Movie.
+ */
 public class DigitalMovie extends Movie {
     private int fileSize;
 
@@ -28,6 +32,10 @@ public class DigitalMovie extends Movie {
         this.fileSize = fileSize;
     }
 
+    /**
+     * Copies over attributes from a DigitalMovie object
+     * @param m - the DigitalMovie object who's attributes are being used.
+     */
     public DigitalMovie(DigitalMovie m) {
         this(m.getTitle(), m.getGenre(),
                 m.getDurationMins(), m.getSummary(),
@@ -37,12 +45,17 @@ public class DigitalMovie extends Movie {
 
     /**
      * overrides toString
+     * @retn - String wih toString from parent object + the file size of the digital movie object.
      */
     @Override
     public String toString() {
         return super.toString() + " File size: " + this.fileSize + "kB \n";
     }
 
+    /**
+     * Retrieves the file size.
+     * @return - int representing the file size of a movie.
+     */
     public int getFileSize() {
         return (this.fileSize);
     }
