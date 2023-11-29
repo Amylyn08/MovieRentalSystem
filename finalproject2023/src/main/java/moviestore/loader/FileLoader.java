@@ -36,12 +36,12 @@ public class FileLoader implements IDatabase {
                         .add(new DigitalMovie(dataMovie[1], dataMovie[2], Integer.parseInt(dataMovie[3]), dataMovie[4],
                                 Double.parseDouble(dataMovie[5]), Integer.parseInt(dataMovie[6]),
                                 Double.parseDouble(dataMovie[7]),
-                                Integer.parseInt(dataDigital[1]), Integer.parseInt(dataDigital[2])));
+                                Integer.parseInt(dataDigital[1]), Integer.parseInt(dataDigital[2]), dataMovie[8]));
 
                 loadMovies.add(new DVD(dataMovie[1], dataMovie[2], Integer.parseInt(dataMovie[3]), dataMovie[4],
                         Double.parseDouble(dataMovie[5]), Integer.parseInt(dataMovie[6]),
                         Double.parseDouble(dataMovie[7]),
-                        Integer.parseInt(dataDVD[1])));
+                        Integer.parseInt(dataDVD[1]),  dataMovie[8]));
             }
             return loadMovies;
         } catch (IOException e) {

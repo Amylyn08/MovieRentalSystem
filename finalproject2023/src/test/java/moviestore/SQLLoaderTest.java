@@ -14,10 +14,10 @@ public class SQLLoaderTest {
     public void testRightDigital() throws LoaderFailedException {
         Movie dvdMovie = new DVD("The Lost City", "Action-Adventure", 145,
                 "An archeological expedition races against a rival group to uncover a lost city's secrets.", 240, 55,
-                40.50, 2);
+                40.50, 2,"https://www.youtube.com/watch?v=nfKO9rYDmE8");
         Movie digitalMovie = new DigitalMovie("Elf", "Comedy", 97,
                 "A human raised by elves at the North Pole embarks on a journey to New York City to find his real father.",
-                240, 55, 6.99, 1800, 2);
+                240, 55, 6.99, 1800, 2,"https://www.youtube.com/watch?v=nfKO9rYDmE8");
         SQLLoader loader = new SQLLoader("A2232160", "Iliketurtles0132");
         List<Movie> loadedMovies = loader.loadMovies();
         assertTrue(dvdMovie.equals(loadedMovies.get(0)));

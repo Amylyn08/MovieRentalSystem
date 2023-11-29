@@ -98,6 +98,7 @@ CREATE TABLE Movies (
     additionOfRatings NUMBER(4) NOT NULL,
     numRatings NUMBER(3) NOT NULL,
     price NUMBER(6,2) NOT NULL,
+    movieURL VARCHAR2(50) NOT NULL,
     productID NUMBER(2) REFERENCES Products(productID) ON DELETE CASCADE NOT NULL
 );
 
