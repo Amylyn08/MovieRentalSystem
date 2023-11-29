@@ -25,6 +25,11 @@ public class SQLLoader implements IDatabase {
             this.conn.close();
     }
 
+    /**
+     * this method establishes the connection to the database
+     * @param {String} - represents the username
+     * @param {String} - represents the password
+     */
     public void createConnection(String user, String password) {
         try {
             this.conn = DriverManager.getConnection(
@@ -35,22 +40,9 @@ public class SQLLoader implements IDatabase {
         }
     }
 
-    public Connection getConnection() {
-        return this.conn;
-    }
-
-    public void load() throws LoaderFailedException {
-        String dvdQuery = "SELECT title FROM Movies";
-        try {
-            PreparedStatement query = this.conn.prepareStatement(dvdQuery);
-            ResultSet rs = query.executeQuery();
-            rs.next();
-            System.out.println(rs.getString(1));
-        } catch (SQLException e) {
-            throw new LoaderFailedException(e);
-        }
-    }
-
+    /**
+     * this method loads all the movies from the database through 2 queries: 1 for digital and 1 for DVDs
+     */
     public List<Movie> loadMovies() throws LoaderFailedException {
         try {
             List<Movie> movies = new ArrayList<Movie>();
@@ -94,7 +86,27 @@ public class SQLLoader implements IDatabase {
         }
     }
 
+    /**
+     * this method loads all customers from the database using a query
+     */
     public List<Customer> loadCustomers() throws LoaderFailedException {
+            CallableStatement cs = this.conn.prepareCall("{call viewReviewProdMenu.viewReviews(?)}");
+            cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+            cs.execute();
+            ResultSet rs = (ResultSet) cs.getObject(1);
+            List<Review> reviews = new ArrayList<Review>();
+            while (rs.next()) {
+                reviews.add(new Review(
+                        rs.getInt("REVIEWID"),
+                        rs.getInt("PRODUCTID"),
+                        rs.getInt("CUSTOMERID"),
+                        rs.getDouble("STAR"),
+                        rs.getInt("FLAGNUMS"),
+                        rs.getString("DESCRIPTION")));
+            }
+            return reviews;
+    
+        }
         try {
             List<Customer> customers = new ArrayList<Customer>();
             String getCustomers = "SELECT * FROM Moviestore_Customers";
