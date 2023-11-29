@@ -500,7 +500,7 @@ AS
     AS 
     BEGIN
         OPEN cursor_c FOR
-            SELECT * FROM Movies INNER JOIN DVDs USING(movieID);
+            SELECT * FROM Moviestore_Customers;
     END;
     
     PROCEDURE getDigitalMovies (cursor_c IN OUT cursor_table)
@@ -510,11 +510,11 @@ AS
             SELECT * FROM Movies INNER JOIN DigitalMovies USING(movieID);
     END;
     
-    PROCEDURE getPhysicalMovies (cursor_c IN OUT cursor_table)
+    PROCEDURE getPhysicalMovies(cursor_c IN OUT cursor_table)
     AS 
     BEGIN
         OPEN cursor_c FOR
-            SELECT * FROM Orders;
+            SELECT * FROM Movies INNER JOIN DVDs USING(movieID);
     END;
 END loading;
 /

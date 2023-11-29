@@ -45,15 +45,16 @@ public class SQLLoader implements IDatabase {
      */
     public List<Movie> loadMovies() throws LoaderFailedException {
         try {
+            CallableStatement dvd = this.conn.prepareCall("{call loading.getPhysicalMovies(?)}");
+            dvd.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+            dvd.execute();
+            ResultSet rs = (ResultSet) dvd.getObject(1);
             List<Movie> movies = new ArrayList<Movie>();
-            String dvdQuery = "SELECT * FROM Movies INNER JOIN DVDs USING(movieID)";
-            Statement stmt = this.conn.createStatement();
-            ResultSet rs = stmt.executeQuery(dvdQuery);
             while (rs.next()) {
                 movies.add(new DVD(
-                        rs.getString("title"),
-                        rs.getString("genre"),
-                        rs.getInt("duration"),
+                        rs.getString("TITLE"),
+                        rs.getString("GENRE"),
+                        rs.getInt("DURATION"),
                         rs.getString("summary"),
                         rs.getDouble("additionOfRatings"),
                         rs.getInt("numRatings"),
@@ -61,11 +62,11 @@ public class SQLLoader implements IDatabase {
                         rs.getInt("stock"),
                         rs.getString("movieURL")));
             }
-            System.out.println("loaded");
 
-            String digitalQuery = "SELECT * FROM Movies INNER JOIN DigitalMovies USING(movieID)";
-            Statement stmt2 = this.conn.createStatement();
-            rs = stmt2.executeQuery(digitalQuery);
+            CallableStatement digital = this.conn.prepareCall("{call loading.getDigitalMovies(?)}");
+            digital.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+            digital.execute();
+            rs = (ResultSet) digital.getObject(1);
             while (rs.next()) {
                 movies.add(new DigitalMovie(
                         rs.getString("title"),
@@ -90,36 +91,20 @@ public class SQLLoader implements IDatabase {
      * this method loads all customers from the database using a query
      */
     public List<Customer> loadCustomers() throws LoaderFailedException {
-            CallableStatement cs = this.conn.prepareCall("{call viewReviewProdMenu.viewReviews(?)}");
+        try {
+            CallableStatement cs = this.conn.prepareCall("{call loading.getCustomers(?)}");
             cs.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
             cs.execute();
             ResultSet rs = (ResultSet) cs.getObject(1);
-            List<Review> reviews = new ArrayList<Review>();
-            while (rs.next()) {
-                reviews.add(new Review(
-                        rs.getInt("REVIEWID"),
-                        rs.getInt("PRODUCTID"),
-                        rs.getInt("CUSTOMERID"),
-                        rs.getDouble("STAR"),
-                        rs.getInt("FLAGNUMS"),
-                        rs.getString("DESCRIPTION")));
-            }
-            return reviews;
-    
-        }
-        try {
             List<Customer> customers = new ArrayList<Customer>();
-            String getCustomers = "SELECT * FROM Moviestore_Customers";
-            Statement stmt = this.conn.createStatement();
-            ResultSet rs = stmt.executeQuery(getCustomers);
             while (rs.next()) {
                 customers.add(new Customer(
                         rs.getString("customerName"),
                         rs.getInt("points")));
             }
-
-            return (customers);
-        } catch (SQLException e) {
+            return customers;
+    
+        } catch(SQLException e) {
             throw new LoaderFailedException(e);
         }
     }
