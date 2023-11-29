@@ -1,14 +1,9 @@
 package moviestore;
 
-import moviestore.discounts.FiftyDollarDiscount;
-import moviestore.discounts.IDiscountStrategy;
 import moviestore.exceptions.LoaderFailedException;
 import moviestore.loader.*;
 import moviestore.products.*;
 import java.util.*;
-import java.io.*;
-import java.nio.*;
-import java.nio.file.*;
 import java.sql.*;
 
 public class AppforTesting {
@@ -18,6 +13,8 @@ public class AppforTesting {
         List<Movie> movies = loader.loadMovies();
         System.out.println("Press 1 to play trailer for movie");
         int input = Integer.parseInt(scan.nextLine());
-        if(input == 1) {movies.get(8).playTrailer();}
+        if (input == 1) {
+            movies.get(8).playTrailer();
+        }
     }
 }

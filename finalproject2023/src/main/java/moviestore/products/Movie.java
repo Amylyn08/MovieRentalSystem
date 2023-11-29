@@ -1,9 +1,9 @@
 package moviestore.products;
+
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
 
 public abstract class Movie {
     private String title;
@@ -67,7 +67,7 @@ public abstract class Movie {
         return this.numRatings;
     }
 
-    public String getURL(){
+    public String getURL() {
         return this.URL;
     }
 
@@ -122,10 +122,9 @@ public abstract class Movie {
                 + "\n");
 
     }
-    public void rentMovie()
-    {
-        if (this.stock <= 0)
-        {
+
+    public void rentMovie() {
+        if (this.stock <= 0) {
             throw new IllegalArgumentException("This movie does not have enough stock in the database!");
         }
         this.stock = this.stock - 1;
@@ -135,18 +134,16 @@ public abstract class Movie {
         this.stock = this.stock + 1;
     }
 
-    public void playTrailer(){
-        if(Desktop.isDesktopSupported()){
+    public void playTrailer() {
+        if (Desktop.isDesktopSupported()) {
             Desktop desktop = Desktop.getDesktop();
             try {
                 desktop.browse(new URI(this.URL));
             } catch (IOException | URISyntaxException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        }
-        else{
-            System.out.println("Unable to play move. Here is the URL: "+this.URL);
+        } else {
+            System.out.println("Unable to play move. Here is the URL: " + this.URL);
         }
     }
 
