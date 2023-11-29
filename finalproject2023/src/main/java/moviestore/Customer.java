@@ -27,6 +27,15 @@ public class Customer {
         this(other.name, other.points);
     }
 
+    /**
+     * this overloaded constructor is used to add a customer and initializes their points to 0.
+     * @param {String} - represents the name of the customer
+     */
+    public Customer(String name)
+    {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o)
     {

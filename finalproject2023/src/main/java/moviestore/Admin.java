@@ -21,10 +21,10 @@ import moviestore.loader.FileLoader;
 import moviestore.loader.IDatabase;
 import moviestore.products.Movie;
 
-public class Employee {
+public class Admin {
     public static final Scanner scan = new Scanner(System.in);
-
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         IDatabase loader = new FileLoader();
         try {
             List<Movie> movies = loader.loadMovies();
@@ -71,7 +71,7 @@ public class Employee {
                     viewFilteredMovies(system);
                     break;
                 case 4:
-                    manageCustomers(system);
+                    manageSystem(system);
                     break;
                 case 5:
                     System.out.println("Chosen \"EXIT\". System exiting.. Goodbye!!");
@@ -203,24 +203,24 @@ public class Employee {
     /**
      * this function displays the menu options for filtering
      */
-    public static void customerMenuOptions() {
+    public static void manageSystemOptions() {
         System.out.println("\n------------------------------------------------------------- ");
-        System.out.println("1. Rent movie");
-        System.out.println("2. Return movie");
-        System.out.println("3. Select a new customer");
+        System.out.println("1. Remove a customer");
+        System.out.println("2. Add a customer");
+        System.out.println("3. Remove a movie");
+        System.out.println("3. Add a movie");
         System.out.println("4. BACK \n");
         System.out.println("Enter the number of the option you would like to select: ");
     }
 
     /**
-     * this method allows the user to interact with the customer menu by taking
-     * their input corresponding
+     * this method allows the user to interact with the sorting menu by taking their
+     * input corresponding
      * to the number of the option they chose
      */
-    public static void manageCustomers(BookRentalSystem system) {
+    public static void manageSystem(BookRentalSystem system) {
         int input = 0;
-        Customer selected = getCustomer(system.getCustomers());
-        customerMenuOptions();
+        manageSystemOptions();
         do {
             try {
                 input = Integer.parseInt(scan.nextLine());
@@ -230,35 +230,19 @@ public class Employee {
             switch (input) {
                 case 1:
                     System.out.println("\033c");
-                    Movie toRent = getMovie(system);
-                    System.out.println("Would you like to use your points? y/n");
-                    String ans = "";
-                    do {
-                        ans = scan.nextLine();
-                    } while (!ans.equals("y") && !ans.equals("n"));
-                    double price = toRent.getPrice();
-                    if (ans.equals("y")) {
-                        price = payRent(toRent, selected);
-                    }
-                    System.out.println("Your total is: " + price );
-                    system.rentMovie(toRent);
-                    selected.rentMovie(toRent);
-                    System.out.println("Movie rented successfully");
+                    Customer cusToRemove = getCustomer(system.getCustomers());
+                    system.removeCustomer(cusToRemove);
                     break;
                 case 2:
                     System.out.println("\033c");
-                    if (selected.getRentedMovies().size() == 0)
-                        System.out.println("Nothing to return!");
-                    else {
-                        Movie toReturn = movieToReturn(selected);
-                        system.returnMovie(toReturn);
-                        selected.returnMovie(toReturn);
-                        System.out.println("Movie returned successfully");
-                    }
+                    addCustomerToSystem(system);
+                    
                     break;
                 case 3:
                     System.out.println("\033c");
-                    selected = getCustomer(system.getCustomers());
+                    System.out.println("Enter the title snippet: ");
+                    String titleSnip = scan.nextLine();
+                    system.setFilter(new FilterByTitle(titleSnip));
                     break;
                 case 4:
                     System.out.println("\033c");
@@ -268,7 +252,9 @@ public class Employee {
                     System.out.println("Invalid option. Please try again.");
                     continue;
             }
-            customerMenuOptions();
+            List<Movie> filtered = system.getFilter().filterMovies(system.getMovies());
+            printMovies(filtered);
+            filteredMenuOptions();
         } while (true);
     }
 
@@ -296,6 +282,20 @@ public class Employee {
             System.out.println("No customers available!");
     }
 
+    public static void addCustomerToSystem(BookRentalSystem system)
+    {
+        System.out.println("Please enter the name of the customer:");
+        Customer cusToAdd = new Customer(scan.nextLine());
+        try {
+            system.addCustomer(cusToAdd);
+            System.out.println("Customer added successfully!");
+        }
+        catch (IllegalArgumentException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
     /**
      * this method allows the employee to select which customer
      * they would like to manage
@@ -317,16 +317,13 @@ public class Employee {
                 System.out.println("Enter an integer");
             }
         }
-
     }
 
     /**
      * this method will allow an employee to select a movie the customer can rent by
-     * allowing
-     * them to select from ONLY AVAILABLE MOVIES .
+     * allowing them to select from ONLY AVAILABLE MOVIES .
      * this method already includes validation for stock and if the movie exists in
-     * the DB
-     * due to the use of the filter.
+     * the DB due to the use of the filter.
      * 
      * @param {BookRentalSystem} - represents the whole system
      * @return - the movie to be returned
@@ -336,7 +333,7 @@ public class Employee {
         system.setFilter(new FilterByAvailable());
         List<Movie> filtered = system.getFilter().filterMovies(system.getMovies());
         printMovies(filtered);
-        System.out.println("Please select the number of the movie you would like to rent");
+        System.out.println("Please select the number of the movie you would like to select");
         int input = 0;
         while (true) {
             try {
@@ -349,64 +346,6 @@ public class Employee {
             }
         }
 
-    }
-
-    /**
-     * this method asks the customer which points discount they would like to use
-     * (if any)
-     * and returns the final price after the discount has been applied
-     * 
-     * @param {Movie}    - represents the movie being managed
-     * @param {Customer} - represents the customer being managed
-     * @return - the final price after discount
-     */
-    public static double payRent(Movie m, Customer c) {
-        int MINPOINTS = 10000;
-        IDiscountStrategy[] discounts = { new FiveDollarDiscount(), new TenDollarDiscount(), new TwentyDollarDiscount(),
-                new FiftyDollarDiscount() };
-        if (c.getPoints() < MINPOINTS)
-        {
-            System.out.println("You dont have enough points!");
-            return m.getPrice();
-        }
-        while (true) {
-            try {
-                System.out.println("Enter the discount you would like to use: \n 1) 5$ \n 2) 10$ \n 3) 20$ \n 4) 50$");
-                int input = Integer.parseInt(scan.nextLine());
-                return discounts[input - 1].finalPrice(c, m);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Please select a valid number");
-            } catch (InputMismatchException e) {
-                System.out.println("Enter an integer");
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
-    }
-
-    /**
-     * this method allows the employee to select which of the customer's movies will
-     * be returned.
-     * 
-     * @param {Customer} - represents the customer being managed
-     * @return - the movie to be returned
-     */
-    public static Movie movieToReturn(Customer c) {
-        List<Movie> cusMovies = c.getRentedMovies();
-        System.out.println("Select the movie you would like to return");
-        printMovies(cusMovies);
-        int input = 0;
-        while (true) {
-            try {
-                input = Integer.parseInt(scan.nextLine());
-                return cusMovies.get(input - 1);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Please select a valid number");
-            } catch (InputMismatchException e) {
-                System.out.println("Enter an integer");
-            }
-        }
     }
 
     public static void playTrailer(BookRentalSystem system) {

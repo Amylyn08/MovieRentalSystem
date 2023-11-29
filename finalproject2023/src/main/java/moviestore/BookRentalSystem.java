@@ -32,6 +32,26 @@ public class BookRentalSystem {
         }
     }
 
+    /**
+     * this method allows the user to add customer into the system
+     */
+    public void addCustomer(Customer cusToAdd)
+    {  
+        if (this.customers.contains(cusToAdd))
+        {
+            throw new IllegalArgumentException("This customer exists!");
+        }
+        this.customers.add(cusToAdd);
+    }
+
+    /**
+     * this method allows the user to remove customer into the system
+     */
+    public void removeCustomer(Customer cusToRemove)
+    {
+        this.customers.remove(cusToRemove);
+    }
+
     public List<Customer> getCustomers() {
         return (this.customers);
     }
