@@ -358,28 +358,6 @@ public class Employee {
         }
 
     }
-
-    // public static void rentMovieValidation(Customer selected, BookRentalSystem
-    // movies)
-    // {
-    // boolean successful = false;
-    // while (!successful)
-    // {
-    // try {
-    // Movie m = getMovie(movies);
-    // movies.rentMovie(m);
-    // selected.rentMovie(m);
-    // System.out.println("movie had been rented successfully!");
-
-    // successful = true;
-    // }
-    // catch(IllegalArgumentException e)
-    // {
-    // System.out.println(e.getMessage());
-    // }
-    // }
-    // }
-
     /**
      * this method asks the customer which points discount they would like to use
      * (if any)
@@ -447,6 +425,7 @@ public class Employee {
                 try {
                     int movieIndex = Integer.parseInt(scan.nextLine());
                     Movie chosenMovie = system.getMovies().get(movieIndex - 1);
+                    System.out.println(ANSI_GREEN+"Trailer opened in browser!..."+ANSI_RESET);
                     chosenMovie.playTrailer();
                     isSuccessful = true;
                 } catch (IndexOutOfBoundsException e) {
