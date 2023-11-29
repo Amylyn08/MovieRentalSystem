@@ -14,6 +14,19 @@ public class DigitalMovie extends Movie {
         this.fileSize = fileSize;
     }
 
+    /**
+     * this overloaded constructor is used to add a new movie into the system.
+     */
+    public DigitalMovie(
+    String title, String genre,
+    int durationMins, String summary, double price, int fileSize, int stock, String URL) {
+        super(title, genre,
+                durationMins, summary, price, stock, URL);
+        if (fileSize <= 0)
+                throw new IllegalArgumentException("filesize cannot be less than or equal to 0!");
+        this.fileSize = fileSize;
+    }
+
     public DigitalMovie(DigitalMovie m) {
         this(m.getTitle(), m.getGenre(),
                 m.getDurationMins(), m.getSummary(),

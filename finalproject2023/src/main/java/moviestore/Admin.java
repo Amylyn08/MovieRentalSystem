@@ -20,6 +20,7 @@ import moviestore.exceptions.LoaderFailedException;
 import moviestore.loader.FileLoader;
 import moviestore.loader.IDatabase;
 import moviestore.products.Movie;
+import moviestore.products.*;
 
 public class Admin {
     public static final Scanner scan = new Scanner(System.in);
@@ -201,7 +202,7 @@ public class Admin {
     }
 
     /**
-     * this function displays the menu options for filtering
+     * this function displays the menu options for managing the system
      */
     public static void manageSystemOptions() {
         System.out.println("\n------------------------------------------------------------- ");
@@ -214,7 +215,7 @@ public class Admin {
     }
 
     /**
-     * this method allows the user to interact with the sorting menu by taking their
+     * this method allows the user to interact with the system managing menu by taking their
      * input corresponding
      * to the number of the option they chose
      */
@@ -230,7 +231,7 @@ public class Admin {
             switch (input) {
                 case 1:
                     System.out.println("\033c");
-                    Customer cusToRemove = getCustomer(system.getCustomers());
+                    Customer cusToRemove = getCustomerFromSystem(system.getCustomers());
                     system.removeCustomer(cusToRemove);
                     break;
                 case 2:
@@ -240,11 +241,19 @@ public class Admin {
                     break;
                 case 3:
                     System.out.println("\033c");
-                    System.out.println("Enter the title snippet: ");
-                    String titleSnip = scan.nextLine();
-                    system.setFilter(new FilterByTitle(titleSnip));
+                    Movie movieToRemove = getMovieFromSystem(system);
+                    system.removeMovie(movieToRemove);
                     break;
                 case 4:
+                    System.out.println("\033c");
+                    Movie toAdd = createMovie();
+                    try { 
+                        system.addMovie(toAdd); 
+                    } catch (IllegalArgumentException e) { 
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case 5:
                     System.out.println("\033c");
                     mainMenu(system);
                     break;
@@ -262,6 +271,10 @@ public class Admin {
      * HELPER METHODS
      ******************************************/
 
+     /**
+      * this method will print all movies
+      * @param {List<Movie>} - represents the movies to print
+      */
     public static void printMovies(List<Movie> movies) {
         int index = 1;
         for (Movie m : movies) {
@@ -272,6 +285,10 @@ public class Admin {
             System.out.println("No movies available!");
     }
 
+    /**
+     * this method will print all customers
+     * @param {List<Customer>} - represents the list of customers to print 
+     */
     public static void printCustomers(List<Customer> cus) {
         int index = 1;
         for (Customer c : cus) {
@@ -282,6 +299,11 @@ public class Admin {
             System.out.println("No customers available!");
     }
 
+    /**
+     * this method allows the admin to create a new customer
+     * and add that customer to the system.
+     * @param {BookRentalSystem} - represents the system
+     */
     public static void addCustomerToSystem(BookRentalSystem system)
     {
         System.out.println("Please enter the name of the customer:");
@@ -303,7 +325,7 @@ public class Admin {
      * @param {BookRentalSystem} - represents the whole system
      * @return - the movie to be returned
      */
-    public static Customer getCustomer(List<Customer> customers) {
+    public static Customer getCustomerFromSystem(List<Customer> customers) {
         System.out.println("Select the customer you would like to manage");
         printCustomers(customers);
         int input = 0;
@@ -320,25 +342,22 @@ public class Admin {
     }
 
     /**
-     * this method will allow an employee to select a movie the customer can rent by
-     * allowing them to select from ONLY AVAILABLE MOVIES .
+     * this method will allow an admin to select what movie they would like to remove from the database
      * this method already includes validation for stock and if the movie exists in
      * the DB due to the use of the filter.
      * 
      * @param {BookRentalSystem} - represents the whole system
-     * @return - the movie to be returned
+     * @return - the movie selected from the system
      */
-    public static Movie getMovie(BookRentalSystem system) {
-        System.out.println("The movies that have enough stock are:");
-        system.setFilter(new FilterByAvailable());
-        List<Movie> filtered = system.getFilter().filterMovies(system.getMovies());
-        printMovies(filtered);
+    public static Movie getMovieFromSystem(BookRentalSystem system) {
+        System.out.println("The movies in the system are:");
+        printMovies(system.getMovies());
         System.out.println("Please select the number of the movie you would like to select");
         int input = 0;
         while (true) {
             try {
                 input = Integer.parseInt(scan.nextLine());
-                return filtered.get(input - 1);
+                return system.getMovies().get(input - 1);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please select a valid number");
             } catch (InputMismatchException e) {
@@ -348,6 +367,63 @@ public class Admin {
 
     }
 
+    /**
+     * this method takes all necessary input to create a new movie. 
+     * this will be used by the system menu in order to add a movie.
+     * @return - returns the new movie to be added to the database
+     */
+    public static Movie createMovie()
+    {
+        System.out.println("Enter the title of the movie: ");
+        String title = scan.nextLine();
+        System.out.println("Enter the genre of the movie: ");
+        String genre = scan.nextLine();
+        
+        System.out.println("Enter the description of the movie: ");
+        String description = scan.nextLine();
+        
+        System.out.println("Enter the trailer URL of the movie: ");
+        String url = scan.nextLine();
+        while(true)
+        {
+            try {
+                System.out.println("Enter the duration of the movie: ");
+                int duration = Integer.parseInt(scan.nextLine());
+                System.out.println("Enter the price of the movie: ");
+                double price = Double.parseDouble(scan.nextLine());
+                System.out.println("Enter the price of the movie: ");
+                int stock = Integer.parseInt(scan.nextLine());
+                System.out.println("Is it a digital movie (enter 1) or a DVD (enter 2)?");
+                int choice = Integer.parseInt(scan.nextLine());
+                switch (choice)
+                {
+                    case 1:
+                        System.out.println("Enter the filesize of the movie: ");
+                        int filesize = Integer.parseInt(scan.nextLine());
+                        return(new DigitalMovie(title, genre,
+                        duration, description, price, filesize, stock, url));
+                    case 2:
+                        return(new DVD(title, genre,
+                        duration, description, price, stock, url));
+                    default:
+                        System.out.println("Input invalid! choose a 1 or 2");
+                }
+            }
+            catch (IllegalArgumentException e)
+            {
+                System.out.println(e.getMessage());
+            }
+            catch (InputMismatchException e)
+            {
+                System.out.println("Please enter the appropriate numeric input");
+            }
+        }
+    }
+
+    /**
+     * this method invokes the necessary code to select a movie from the database 
+     * whose trailer they would like to view
+     */
     public static void playTrailer(BookRentalSystem system) {
         System.out.println("Would you like to watch a trailer for one of these movies? Enter \"y\" if yes");
         String decision = scan.nextLine();

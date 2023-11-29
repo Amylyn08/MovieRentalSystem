@@ -11,6 +11,16 @@ public class DVD extends Movie {
                 numRatings, price, stock, URL );
     }
 
+    /**
+     * this overloaded constructor is used to add a new movie into the system.
+     */
+    public DVD(
+            String title, String genre,
+            int durationMins, String summary, double price, int stock, String URL) {
+        super(title, genre,
+                durationMins, summary, price, stock, URL );
+    }
+
     public DVD(DVD m) {
         this(m.getTitle(), m.getGenre(),
                 m.getDurationMins(), m.getSummary(),

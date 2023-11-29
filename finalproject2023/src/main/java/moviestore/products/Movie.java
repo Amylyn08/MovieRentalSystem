@@ -35,6 +35,29 @@ public abstract class Movie {
         this.URL = URL;
     }
 
+    /**
+     * this overloaded constructor allows the user to create a new movie and 
+     * initializes fields dependent on customers to 0.
+     */
+    public Movie(String title, String genre,
+    int durationMins, String summary, double price, int stock, String URL) 
+    {
+        if (price <= 0 || stock <=0 || durationMins <= 0)
+        {
+            throw new IllegalArgumentException("The price, stock, and duration cannot be less than or equal to 0!");
+        }
+        this.title = title;
+        this.genre = genre;
+        this.durationMins = durationMins;
+        this.summary = summary;
+        this.starRating = 0;
+        this.additionOfRating = 0;
+        this.numRatings = 0;
+        this.price = price;
+        this.stock = stock;
+        this.URL = URL;
+    }
+
     public int getStock() {
         return (this.stock);
     }

@@ -135,9 +135,15 @@ public class BookRentalSystem {
         if (this.movies.contains(m)) {
             throw new IllegalArgumentException("This movie already exists in the database!");
         }
-        if (!(movies.contains(m))) {
-            this.movies.add(m);
-        }
+        this.movies.add(m);
+    }
+
+    /**
+     * this method removes a movie from the system!
+     */
+    public void removeMovie(Movie m)
+    {
+        this.movies.remove(m);
     }
 
     public Movie findMovie(String title, String medium) {
