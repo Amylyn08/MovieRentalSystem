@@ -4,6 +4,13 @@ import java.util.*;
 
 public class FilterByTitle implements IFilterBy{
 
+    private String criteria;
+
+    public FilterByTitle(String criteria)
+    {
+        this.criteria = criteria;
+    }
+
     /**
      * Filters the movie by criteria i.e. title, and appends matching results into new list.
      * @param criteria - What the function is filtering by, i.e. title.
@@ -11,10 +18,10 @@ public class FilterByTitle implements IFilterBy{
      * @return - returns the filtered list version of the movies.
      */
     @Override
-    public List<Movie> filterMovies(String criteria, List<Movie> movies){
+    public List<Movie> filterMovies(List<Movie> movies){
         List<Movie> moviesWithTitle = new ArrayList<Movie>();
         for(Movie m : movies){
-            if(m.getTitle().contains(criteria)){
+            if(m.getTitle().contains(this.criteria)){
                 moviesWithTitle.add(m);
             }       
         }

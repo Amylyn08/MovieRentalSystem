@@ -11,7 +11,7 @@ public class TestSortBy {
     @Test
     public void TestSortByTitle()
     {
-        BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>());
+        BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
         movies.addMovie(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         movies.addMovie(new DigitalMovie("The Cosmic Heist","Sci-Fi",140,"A group of intergalactic thieves plans an audacious heist to steal a cosmic artifact.",230,52,32.99, 1000, 5));
         movies.addMovie(new DVD("Flight of Fantasy","Adventure",155,"Embark on a fantastical journey with mythical creatures and epic adventures.",235,53,12.99, 8));
@@ -28,7 +28,7 @@ public class TestSortBy {
     @Test
     public void TestSortByPrice()
     {
-        BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>());
+        BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
         movies.addMovie(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         movies.addMovie(new DigitalMovie("The Cosmic Heist","Sci-Fi",140,"A group of intergalactic thieves plans an audacious heist to steal a cosmic artifact.",230,52,32.99, 1000, 5));
         movies.addMovie(new DVD("Flight of Fantasy","Adventure",155,"Embark on a fantastical journey with mythical creatures and epic adventures.",235,53,12.99, 8));
@@ -45,7 +45,7 @@ public class TestSortBy {
     @Test
     public void TestSortByRating()
     {
-        BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>());
+        BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
         movies.addMovie(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         movies.addMovie(new DigitalMovie("The Cosmic Heist","Sci-Fi",140,"A group of intergalactic thieves plans an audacious heist to steal a cosmic artifact.",230,52,32.99, 1000, 5));
         movies.addMovie(new DVD("Flight of Fantasy","Adventure",155,"Embark on a fantastical journey with mythical creatures and epic adventures.",235,53,12.99, 8));
@@ -62,7 +62,7 @@ public class TestSortBy {
     @Test
     public void TestSortByDuration()
     {
-        BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>());
+        BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
         movies.addMovie(new DVD("The Lost City","Action-Adventure",145,"An archeological expedition races against a rival group to uncover a lost city's secrets.",240,55,40.50, 5));
         movies.addMovie(new DigitalMovie("The Cosmic Heist","Sci-Fi",140,"A group of intergalactic thieves plans an audacious heist to steal a cosmic artifact.",230,52,32.99, 1000, 5));
         movies.addMovie(new DVD("Flight of Fantasy","Adventure",155,"Embark on a fantastical journey with mythical creatures and epic adventures.",235,53,12.99, 8));

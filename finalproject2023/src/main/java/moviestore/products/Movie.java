@@ -107,8 +107,8 @@ public abstract class Movie {
      */
     @Override
     public String toString() {
-        return ("Movie Title: " + this.title + ", Genre: " + this.genre + ", Duration: " + this.durationMins
-                + ", Summary: " + this.summary + ", Rating: " + this.starRating + ", Stock: " + this.stock
+        return ("Movie Title: " + this.title + "\n Genre: " + this.genre + "\n Duration: " + this.durationMins
+                + "\n Summary: " + this.summary + "\n Rating: " + this.starRating + "\n Stock: " + this.stock
                 + "\n");
 
     }

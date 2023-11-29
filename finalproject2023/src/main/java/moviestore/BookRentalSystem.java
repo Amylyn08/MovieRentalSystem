@@ -11,10 +11,11 @@ public class BookRentalSystem{
     //make displayer field -- add later 
     
     private List<Movie> movies;
+    private List<Customer> customers;
     private ISortBy comparer;
     private IFilterBy filter;
 
-    public BookRentalSystem(List<Movie> movies)
+    public BookRentalSystem(List<Movie> movies, List<Customer> customers)
     {
         this.movies = new ArrayList<Movie>();
         for(Movie m : movies)
@@ -28,6 +29,17 @@ public class BookRentalSystem{
                 this.movies.add(new DigitalMovie((DigitalMovie)m));
             }
         }
+
+        this.customers = new ArrayList<Customer>();
+        for(Customer c : customers)
+        {
+            this.customers.add(new Customer(c));
+        }
+    }
+
+    public List<Customer> getCustomers()
+    {
+        return(this.customers);
     }
 
     public List<Movie> getMovies()
@@ -38,6 +50,16 @@ public class BookRentalSystem{
     public void setSorting(ISortBy newMethod)
     {
         this.comparer = newMethod;
+    }
+
+    public void setFilter(IFilterBy newMethod)
+    {
+        this.filter = newMethod;
+    }
+
+    public IFilterBy getFilter()
+    {
+        return(this.filter);
     }
 
     public void selectionSort()
@@ -78,7 +100,7 @@ public class BookRentalSystem{
     /**
      * Lessens the stock when is called for a certain movie.
      */
-    public void rentMovieStock(Movie m)
+    public void rentMovie(Movie m)
     {
         if (!this.movies.contains(m))
         {
@@ -86,6 +108,19 @@ public class BookRentalSystem{
         }
 
         this.movies.get(this.movies.indexOf(m)).rentMovie();
+    }
+
+    /**
+     * increments the stock when is called for a certain movie.
+     */
+    public void returnMovie(Movie m)
+    {
+        if (!this.movies.contains(m))
+        {
+            throw new IllegalArgumentException("This movie does not exists in the database!");
+        }
+
+        this.movies.get(this.movies.indexOf(m)).returnMovie();
     }
 
     /**
@@ -103,6 +138,20 @@ public class BookRentalSystem{
         }
     }
 
-
+    public Movie findMovie(String title, String medium)
+    {
+        for (Movie m : this.movies)
+        {
+            if (medium == "digital" && m instanceof DigitalMovie && m.getTitle().toLowerCase().equals(title))
+            {
+                return (m);
+            }
+            else if (medium == "dvd" && m instanceof DVD && m.getTitle().toLowerCase().equals(title))
+            {
+                return(m);
+            }
+        }
+        throw new IllegalArgumentException("this movie does not exist in our database!");
+    }
 
 }
