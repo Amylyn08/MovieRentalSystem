@@ -6,5 +6,5 @@ public interface IFilterBy {
     /**
      * returns a list of movies properly filtered
      */
-    List<Movie> filterMovies(String criteria, List<Movie> movies);
+    List<Movie> filterMovies(List<Movie> movies);
 }

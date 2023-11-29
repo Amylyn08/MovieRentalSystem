@@ -1,9 +1,6 @@
 package moviestore;
 
 import java.util.*;
-
-import moviestore.products.DVD;
-import moviestore.products.DigitalMovie;
 import moviestore.products.Movie;
 
 public class Customer {
@@ -20,6 +17,14 @@ public class Customer {
         this.name = name;
         this.points = points;
         this.rented = new ArrayList<Movie>();
+    }
+
+    /**
+     * copy constructor for Customer class
+     */
+    public Customer(Customer other)
+    {
+        this(other.name, other.points);
     }
 
     @Override
