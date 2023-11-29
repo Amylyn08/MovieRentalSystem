@@ -75,7 +75,9 @@ public class Employee {
                     manageCustomers(system);
                     break;
                 case 5:
+                    printMovies(system.getMovies());
                     addRatingtoMovie(system);
+                    mainMenu(system);
                     break;
                 case 6:
                     System.out.println("Chosen \"EXIT\". System exiting.. Goodbye!!");
@@ -452,14 +454,18 @@ public class Employee {
 
     public static void addRatingtoMovie(BookRentalSystem system){
         System.out.println("To add a rating, input the number preceeding a movie in which you would like to add a rating!:");
+        int input = Integer.parseInt(scan.nextLine());
+        System.out.println("Enter a rating star between 0.5 and 5");
         while(true)
             try{
-                int input = Integer.parseInt(scan.nextLine());
-                System.out.println("Enter a rating star between 0.5 and 5");
                 double rating = Double.parseDouble(scan.nextLine());
                 Movie movietoRate = system.getMovies().get(input - 1 );
                 movietoRate.addRating(rating);
+                System.out.println("Rating added succesfully!");
                 return;
+            }
+            catch(NumberFormatException e){
+                System.out.println("Please enter a number");
             }
             catch(IllegalArgumentException e){
                 System.out.println(e.getMessage());

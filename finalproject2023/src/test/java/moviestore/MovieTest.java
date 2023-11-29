@@ -223,4 +223,11 @@ public class MovieTest {
                 40.50, 1000, 5, "https://www.youtube.com/watch?v=nfKO9rYDmE8"));
     }
 
+    @Test
+    public void testCorrectRatingAddiion(){
+        Movie movie = new DigitalMovie("The Lost city", "Action-Adventure", 145, "movie summary", 240, 55, 40.50, 1000, 5, "urlhere");
+        movie.addRating(5);
+        assertTrue(movie.getStarRating() == 4 );
+    }
+
 }
