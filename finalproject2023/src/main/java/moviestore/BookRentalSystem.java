@@ -91,7 +91,6 @@ public class BookRentalSystem {
         Movie temp = this.movies.get(i);
         this.movies.set(i, this.movies.get(index));
         this.movies.set(index, temp);
-
     }
 
     public List<Movie> filterMovies(String criteria)/// AMYY*************************************
