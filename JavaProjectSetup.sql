@@ -402,46 +402,47 @@ INSERT INTO Products (name, category) VALUES ('The Hangover', 'Movies');
 INSERT INTO Products (name, category) VALUES ('Game Night', 'Movies');
 INSERT INTO Products (name, category) VALUES ('Elf', 'Movies');
 
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('The Lost City', 'Action-Adventure', 145, 'An archeological expedition races against a rival group to uncover a lost city''s secrets.', 240, 55, 40.50, 18);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('Infinite Horizons', 'Sci-Fi', 160, 'Exploring the limitless possibilities of parallel universes and the consequences of choice.', 215, 50, 12.99, 19);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('Summer Breeze', 'Romance', 110, 'A romantic tale set against the backdrop of a sun-kissed beach and gentle ocean breezes.', 190, 42, 17.49, 20);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('Eclipse of Shadows', 'Action', 125, 'A lone hero battles against a dark force threatening to engulf the world in eternal darkness.', 220, 48, 20.99, 21);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('Magic Moments', 'Fantasy', 105, 'A heartwarming story of a young magician discovering the true magic of friendship.', 165, 35, 49.99, 22);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('Silent Whispers', 'Drama', 150, 'In a world where words have power a mute protagonist unravels a conspiracy through silence.', 205, 45, 21.99, 23);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('The Cosmic Heist', 'Sci-Fi', 140, 'A group of intergalactic thieves plans an audacious heist to steal a cosmic artifact.', 230, 52, 32.99, 24);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('The Haunting Melody', 'Horror', 95, 'A chilling tale of a haunted melody that brings terror and despair to those who hear it.', 160, 30, 31.99, 25);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('Flight of Fantasy', 'Adventure', 155, 'Embark on a fantastical journey with mythical creatures and epic adventures.', 235, 53, 12.99, 26);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('High Stakes', 'Action', 120, 'A high-stakes thriller where the protagonist must outsmart cunning adversaries in a game of wits.', 195, 40, 36.99, 27);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('The Comedy Conundrum', 'Comedy', 95, 'A comedy of errors ensues when a series of misunderstandings lead to hilarious consequences.', 180, 38, 41.99, 28);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('Parallel Realities', 'Sci-Fi', 165, 'A mind-bending exploration of parallel realities and the impact of choices on the fabric of existence.', 240, 55, 10.50, 29);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('Interstellar', 'Sci-Fi', 169, 'In a future where Earth is dying a team of astronauts embarks on a journey through a wormhole in search of a new habitable planet.', 255, 58, 40.00, 30);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('The Old Guard', 'Action', 125, 'A group of immortal mercenaries must protect their secret and fight against a new threat.', 200, 48, 60.00, 31);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('White Chicks', 'Comedy', 109, 'Two FBI agents go undercover as wealthy heiresses in this hilarious comedy of mistaken identity.', 170, 35, 20.00, 32);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('The Grudge', 'Horror', 93, 'A vengeful spirit haunts a cursed house terrorizing anyone who enters its dark confines.', 185, 40, 5.99, 33);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('21 Jump Street', 'Action-Comedy', 112, 'Two undercover cops infiltrate a high school to bust a drug ring leading to unexpected comedic chaos.', 210, 50, 109.99, 34);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('The Hangover', 'Comedy', 100, 'A wild bachelor party in Las Vegas leads to a series of outrageous and comedic misadventures.', 198, 45, 9.99, 35);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('Game Night', 'Comedy-Mystery', 100, 'A group of friends'' game night turns into a real-life mystery when one of them is kidnapped.', 220, 52, 8.00, 36);
-INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, productID)
-VALUES ('Elf', 'Comedy', 97, 'A human raised by elves at the North Pole embarks on a journey to New York City to find his real father.', 240, 55, 6.99, 37);
+-- INSERT statements for Movies table
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('The Lost City', 'Action-Adventure', 145, 'An archeological expedition races against a rival group to uncover a lost city''s secrets.', 240, 55, 40.50, 'https://www.youtube.com/watch?v=nfKO9rYDmE8', 18);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('Infinite Horizons', 'Sci-Fi', 160, 'Exploring the limitless possibilities of parallel universes and the consequences of choice.', 215, 50, 12.99, 'https://www.youtube.com/watch?v=z3ZXysHLS70', 19);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('Summer Breeze', 'Romance', 110, 'A romantic tale set against the backdrop of a sun-kissed beach and gentle ocean breezes.', 190, 42, 17.49, 'https://www.youtube.com/watch?v=MsW8rXPcnM0', 20);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('Eclipse of Shadows', 'Action', 125, 'A lone hero battles against a dark force threatening to engulf the world in eternal darkness.', 220, 48, 20.99, 'https://www.youtube.com/watch?v=jqyTb6UaeNU', 21);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('Magic Moments', 'Fantasy', 105, 'A heartwarming story of a young magician discovering the true magic of friendship.', 165, 35, 49.99, 'https://www.youtube.com/watch?v=v82p7AgHJFw', 22);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('Silent Whispers', 'Drama', 150, 'In a world where words have power, a mute protagonist unravels a conspiracy through silence.', 205, 45, 21.99, 'https://www.youtube.com/watch?v=PMAkTA6v1Fs', 23);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('The Cosmic Heist', 'Sci-Fi', 140, 'A group of intergalactic thieves plans an audacious heist to steal a cosmic artifact.', 230, 52, 32.99, 'https://www.youtube.com/watch?v=8yilea7G6IQ', 24);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('The Haunting Melody', 'Horror', 95, 'A chilling tale of a haunted melody that brings terror and despair to those who hear it.', 160, 30, 31.99, 'https://www.youtube.com/watch?v=CiJf82QyMW4', 25);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('Flight of Fantasy', 'Adventure', 155, 'Embark on a fantastical journey with mythical creatures and epic adventures.', 235, 53, 12.99, 'https://www.youtube.com/watch?v=L8uXekj_i5I', 26);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('High Stakes', 'Action', 120, 'A high-stakes thriller where the protagonist must outsmart cunning adversaries in a game of wits.', 195, 40, 36.99, 'https://www.youtube.com/watch?v=a_Da5ZoFMII', 27);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('The Comedy Conundrum', 'Comedy', 95, 'A comedy of errors ensues when a series of misunderstandings lead to hilarious consequences.', 180, 38, 41.99, 'https://www.youtube.com/watch?v=QJit_DU2XhM', 28);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('Parallel Realities', 'Sci-Fi', 165, 'A mind-bending exploration of parallel realities and the impact of choices on the fabric of existence.', 240, 55, 10.50, 'https://www.youtube.com/watch?v=LTGpg61aSo8', 29);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('Interstellar', 'Sci-Fi', 169, 'In a future where Earth is dying, a team of astronauts embarks on a journey through a wormhole in search of a new habitable planet.', 255, 58, 40.00, 'https://www.youtube.com/watch?v=zSWdZVtXT7E', 30);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('The Old Guard', 'Action', 125, 'A group of immortal mercenaries must protect their secret and fight against a new threat.', 200, 48, 60.00, 'https://www.youtube.com/watch?v=aK-X2d0lJ_s', 31);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('White Chicks', 'Comedy', 109, 'Two FBI agents go undercover as wealthy heiresses in this hilarious comedy of mistaken identity.', 170, 35, 20.00, 'https://www.youtube.com/watch?v=aeVkbNka9HM', 32);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('The Grudge', 'Horror', 93, 'A vengeful spirit haunts a cursed house, terrorizing anyone who enters its dark confines.', 185, 40, 5.99, 'https://www.youtube.com/watch?v=O2NKzO-fxwQ', 33);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('21 Jump Street', 'Action-Comedy', 112, 'Two undercover cops infiltrate a high school to bust a drug ring, leading to unexpected comedic chaos.', 210, 50, 109.99, 'https://www.youtube.com/watch?v=RLoKtb4c4W0', 34);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('The Hangover', 'Comedy', 100, 'A wild bachelor party in Las Vegas leads to a series of outrageous and comedic misadventures.', 198, 45, 9.99, 'https://www.youtube.com/watch?v=tcdUhdOlz9M', 35);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('Game Night', 'Comedy-Mystery', 100, 'A group of friends'' game night turns into a real-life mystery when one of them is kidnapped.', 220, 52, 8.00, 'https://www.youtube.com/watch?v=qmxMAdV6s4U', 36);
+INSERT INTO Movies (title, genre, duration, summary, additionOfRatings, numRatings, price, movieURL, productID)
+VALUES ('Elf', 'Comedy', 97, 'A human raised by elves at the North Pole embarks on a journey to New York City to find his real father.', 240, 55, 6.99, 'https://www.youtube.com/watch?v=a54yC1etmVc', 37);
 
 INSERT INTO DVDs (movieID, stock) VALUES (1, 3);
 INSERT INTO DVDs (movieID, stock) VALUES (2, 5);

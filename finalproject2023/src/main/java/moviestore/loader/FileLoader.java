@@ -5,9 +5,11 @@ import moviestore.exceptions.LoaderFailedException;
 import moviestore.products.*;
 import java.util.*;
 import java.io.*;
-import java.nio.*;
 import java.nio.file.*;
 
+/**
+ * Responsible for reading CSV files and returning the appropriate lists.
+ */
 public class FileLoader implements IDatabase {
 
     /**

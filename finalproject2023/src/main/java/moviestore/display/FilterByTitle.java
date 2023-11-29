@@ -2,10 +2,14 @@ package moviestore.display;
 import moviestore.products.*;
 import java.util.*;
 
+/**Class responsible in filtering by title */
 public class FilterByTitle implements IFilterBy{
 
     private String criteria;
-
+    /**
+     * Constructor initializing the criteria field.
+     * @param criteria - The criteria (title) needed to filte by.
+     */
     public FilterByTitle(String criteria)
     {
         this.criteria = criteria;

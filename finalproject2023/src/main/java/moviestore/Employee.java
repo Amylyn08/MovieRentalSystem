@@ -47,7 +47,8 @@ public class Employee {
         System.out.println("2. View movies sorted by a criteria");
         System.out.println("3. View movies filtered by a criteria");
         System.out.println("4. Manage customers");
-        System.out.println("5. EXIT \n");
+        System.out.println("5. Add a review for a movie");
+        System.out.println("6. EXIT \n");
         System.out.println("Enter the number of the option you would like to select: ");
         do {
 
@@ -74,6 +75,9 @@ public class Employee {
                     manageCustomers(system);
                     break;
                 case 5:
+                    addRatingtoMovie(system);
+                    break;
+                case 6:
                     System.out.println("Chosen \"EXIT\". System exiting.. Goodbye!!");
                     System.exit(0);
                 default:
@@ -444,5 +448,21 @@ public class Employee {
             }
         }
         return;
+    }
+
+    public static void addRatingtoMovie(BookRentalSystem system){
+        System.out.println("To add a rating, input the number preceeding a movie in which you would like to add a rating!:");
+        while(true)
+            try{
+                int input = Integer.parseInt(scan.nextLine());
+                System.out.println("Enter a rating star between 0.5 and 5");
+                double rating = Double.parseDouble(scan.nextLine());
+                Movie movietoRate = system.getMovies().get(input - 1 );
+                movietoRate.addRating(rating);
+                return;
+            }
+            catch(IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
     }
 }

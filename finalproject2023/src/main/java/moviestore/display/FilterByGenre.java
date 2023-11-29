@@ -3,11 +3,14 @@ package moviestore.display;
 import java.util.*;
 
 import moviestore.products.Movie;
-
+/**Class responsible in filtering by genre specified */
 public class FilterByGenre implements IFilterBy {
 
     private String criteria;
-
+    /**
+     * Constructor contain the criteria, corresponding to the genre specified.
+     * @param criteria - The criteria needed to filter by.
+     */
     public FilterByGenre(String criteria)
     {
         this.criteria = criteria;

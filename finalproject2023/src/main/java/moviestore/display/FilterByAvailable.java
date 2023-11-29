@@ -3,6 +3,7 @@ import java.util.*;
 
 import moviestore.products.Movie;
 
+/**Class has a method responsible for filtering by availability in stocks. */
 public class FilterByAvailable implements IFilterBy {
 
     /**

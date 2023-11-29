@@ -32,22 +32,42 @@ public class BookRentalSystem {
         }
     }
 
+    
+    /** 
+     * @return List<Customer>
+     */
     public List<Customer> getCustomers() {
         return (this.customers);
     }
 
+    
+    /** 
+     * @return List<Movie>
+     */
     public List<Movie> getMovies() {
         return (this.movies);
     }
 
+    
+    /** 
+     * @param newMethod
+     */
     public void setSorting(ISortBy newMethod) {
         this.comparer = newMethod;
     }
 
+    
+    /** 
+     * @param newMethod
+     */
     public void setFilter(IFilterBy newMethod) {
         this.filter = newMethod;
     }
 
+    
+    /** 
+     * @return IFilterBy
+     */
     public IFilterBy getFilter() {
         return (this.filter);
     }
