@@ -5,6 +5,8 @@ import org.junit.Test;
 import moviestore.products.DVD;
 import moviestore.products.DigitalMovie;
 import moviestore.products.Movie;
+import moviestore.loader.*;
+import moviestore.exceptions.*;
 
 import static org.junit.Assert.*;
 import java.util.*;
@@ -51,6 +53,39 @@ public class CustomerTest {
         cus.rentMovie(m1);
         cus.returnMovie(m1);
         assertEquals(0, cus.getRentedMovies().size());
+
+    }
+
+    @Test
+    public void testRemoveCustomer()
+    {
+        try {
+            IDatabase loader = new FileLoader();
+            BookRentalSystem system = new BookRentalSystem(new ArrayList<Movie>(), loader.loadCustomers());
+            Customer c = new Customer ("Robert Miller", 800);
+            system.removeCustomer(c);
+            assertFalse(system.getCustomers().contains(c));
+        }
+        catch (LoaderFailedException e)
+        {
+            // test should fail
+        }
+    }
+
+    @Test
+    public void testAddCustomer()
+    {
+        try {
+            IDatabase loader = new FileLoader();
+            BookRentalSystem system = new BookRentalSystem(new ArrayList<Movie>(), loader.loadCustomers());
+            Customer c = new Customer ("Lolita Smith", 800);
+            system.addCustomer(c);
+            assertTrue(system.getCustomers().contains(c));
+        }
+        catch (LoaderFailedException e)
+        {
+            // test should fail
+        }
 
     }
 

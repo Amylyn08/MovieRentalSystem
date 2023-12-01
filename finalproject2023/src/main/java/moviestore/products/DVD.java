@@ -27,6 +27,17 @@ public class DVD extends Movie {
                 durationMins, summary, additionOfRating,
                 numRatings, price, stock, URL );
     }
+
+    /**
+     * this overloaded constructor is used to add a new movie into the system.
+     */
+    public DVD(
+            String title, String genre,
+            int durationMins, String summary, double price, int stock, String URL) {
+        super(title, genre,
+                durationMins, summary, price, stock, URL );
+    }
+
     /**
      * Copy constructor 
      * @param m - The DVD Object that is getting copied from.

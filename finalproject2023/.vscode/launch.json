@@ -1,27 +1,18 @@
 {
     "configurations": [
+    
         {
             "type": "java",
             "name": "Employee",
             "request": "launch",
-<<<<<<< HEAD
-            "mainClass": "moviestore.AppforTesting",
-=======
             "mainClass": "moviestore.Employee",
->>>>>>> 57fc717e18838cfc926b8267e9f9b369f70c2559
             "projectName": "assignment5"
         },
         {
             "type": "java",
-<<<<<<< HEAD
-            "name": "AppforTesting",
+            "name": "Admin",
             "request": "launch",
-            "mainClass": "moviestore.AppforTesting",
-=======
-            "name": "Employee",
-            "request": "launch",
-            "mainClass": "moviestore.Employee",
->>>>>>> 57fc717e18838cfc926b8267e9f9b369f70c2559
+            "mainClass": "moviestore.Admin",
             "projectName": "finalproject2023"
         },
         {
