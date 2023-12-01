@@ -7,15 +7,21 @@ import moviestore.products.DigitalMovie;
 import moviestore.products.Movie;
 import moviestore.display.*;
 
+/**
+ * This class is responsible for the logic of the application, and data manipulation of List objects
+ */
 public class BookRentalSystem {
-
-    // make displayer field -- add later
 
     private List<Movie> movies;
     private List<Customer> customers;
     private ISortBy comparer;
     private IFilterBy filter;
 
+    /**
+     * Constructor to initialize lists of movies and customers.
+     * @param movies - Reprenting movie object.
+     * @param customers - Representing customer object.
+     */
     public BookRentalSystem(List<Movie> movies, List<Customer> customers) {
         this.movies = new ArrayList<Movie>();
         for (Movie m : movies) {
@@ -34,7 +40,8 @@ public class BookRentalSystem {
 
     
     /** 
-     * @return List<Customer>
+     * Retrieves list of customers
+     * @return List<Customer> 
      */
     public List<Customer> getCustomers() {
         return (this.customers);
@@ -42,6 +49,7 @@ public class BookRentalSystem {
 
     
     /** 
+     * Retrieves list of movies.
      * @return List<Movie>
      */
     public List<Movie> getMovies() {
@@ -50,6 +58,7 @@ public class BookRentalSystem {
 
     
     /** 
+     * Sets the comparer field of the class, with an ISortBy type strategy.
      * @param newMethod
      */
     public void setSorting(ISortBy newMethod) {
@@ -58,6 +67,7 @@ public class BookRentalSystem {
 
     
     /** 
+     * Sets the filter field with a IFilterBy type strategy
      * @param newMethod
      */
     public void setFilter(IFilterBy newMethod) {
@@ -66,12 +76,15 @@ public class BookRentalSystem {
 
     
     /** 
-     * @return IFilterBy
+     * Retrieves teh type of filter on the class.
+     * @return IFilterBy - The filter strategry
      */
     public IFilterBy getFilter() {
         return (this.filter);
     }
-
+    /**
+     * function responsible for sorting by using the swap method,  using the comparer field.
+     */
     public void selectionSort() {
         for (int i = 0; i < this.movies.size() - 1; i++) {
             int index = i;
@@ -86,28 +99,18 @@ public class BookRentalSystem {
 
     /**
      * This method swaps two objects with two different indexes
+     * @param i 
+     * @param j
      */
     private void swap(int i, int index) {
         Movie temp = this.movies.get(i);
         this.movies.set(i, this.movies.get(index));
         this.movies.set(index, temp);
-
-    }
-
-    public List<Movie> filterMovies(String criteria)/// AMYY*************************************
-    {
-        List<Movie> filteredMovies = new ArrayList<Movie>();
-        /**
-         * loop through movies
-         * in filterBy: if movie.criteria = criteria
-         * 
-         */
-
-        return filteredMovies;
     }
 
     /**
-     * Lessens the stock when is called for a certain movie.
+     * Lessens the stock when is called for a certain movie, calls rentMovie() from movie class.
+     * @param m - The movie object that is getting rented
      */
     public void rentMovie(Movie m) {
         if (!this.movies.contains(m)) {
@@ -118,7 +121,8 @@ public class BookRentalSystem {
     }
 
     /**
-     * increments the stock when is called for a certain movie.
+     * increments the stock when is called for a certain movie, calls returnMovie() from Movie class
+     * @param m - the movie object that is being returned.
      */
     public void returnMovie(Movie m) {
         if (!this.movies.contains(m)) {
@@ -130,6 +134,8 @@ public class BookRentalSystem {
 
     /**
      * This method adds a movie to the list of movies.
+     * @param m - the movie object that is getting added.
+     * @throws IllegalArgumentException - If the movie already exists in the list of movies.
      */
     public void addMovie(Movie m) {
         if (this.movies.contains(m)) {
@@ -139,7 +145,13 @@ public class BookRentalSystem {
             this.movies.add(m);
         }
     }
-
+    /**
+     * Finds a movie in a list of movies.
+     * @param title - Title of movie.
+     * @param medium - Medium of the movie.
+     * @throws IllegalArgumentException - If the movie does not exist in the database.
+     * @return - The movie that is a match.
+     */
     public Movie findMovie(String title, String medium) {
         for (Movie m : this.movies) {
             if (medium == "digital" && m instanceof DigitalMovie && m.getTitle().toLowerCase().equals(title)) {
