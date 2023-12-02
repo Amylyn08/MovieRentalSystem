@@ -16,7 +16,7 @@ public class FileLoaderTest {
     public void testRightDigital() throws LoaderFailedException {
         Movie digitalMovie = new DigitalMovie("The Lost City", "Action-Adventure", 145,
                 "An archeological expedition races against a rival group to uncover a lost city's secrets.", 240, 55,
-                40.50, 1800, 2,"https://www.youtube.com/watch?v=nfKO9rYDmE8");
+                40.50, 1800, 2, "https://www.youtube.com/watch?v=nfKO9rYDmE8");
         FileLoader loader = new FileLoader();
         List<Movie> loadedMovies = loader.loadMovies();
         // String firstMovie = loadedMovies.get(0).getTitle()
@@ -27,7 +27,7 @@ public class FileLoaderTest {
     public void testRightDVD() throws LoaderFailedException {
         Movie dvdMovie = new DVD("The Lost City", "Action-Adventure", 145,
                 "An archeological expedition races against a rival group to uncover a lost city's secrets.", 240, 55,
-                40.50, 3,"https://www.youtube.com/watch?v=nfKO9rYDmE8");
+                40.50, 3, "https://www.youtube.com/watch?v=nfKO9rYDmE8");
     }
 
     @Test

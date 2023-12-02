@@ -6,7 +6,6 @@ import java.util.List;
 import moviestore.display.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import moviestore.BookRentalSystem;
 
 public class TestSortBy {
         @Test
