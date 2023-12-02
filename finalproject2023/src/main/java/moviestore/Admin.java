@@ -15,6 +15,7 @@ import moviestore.loader.FileLoader;
 import moviestore.loader.IDatabase;
 import moviestore.products.*;
 
+/** Allows admin to use movie services and manipulate the data(s). */
 public class Admin {
     public static final Scanner scan = new Scanner(System.in);
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -28,7 +29,7 @@ public class Admin {
         try {
             List<Movie> movies = loader.loadMovies();
             List<Customer> customers = loader.loadCustomers();
-            BookRentalSystem movieSystem = new BookRentalSystem(movies, customers);
+            MovieRentalSystem movieSystem = new MovieRentalSystem(movies, customers);
             mainMenu(movieSystem);
         } catch (LoaderFailedException e) {
             System.out.println(ANSI_RED + "movies could not be properly loaded" + ANSI_RESET);
@@ -38,7 +39,7 @@ public class Admin {
     /**
      * this function represents the main menu with MAIN FUNCTIONS
      */
-    public static void mainMenu(BookRentalSystem system) {
+    public static void mainMenu(MovieRentalSystem system) {
         int input = 0;
         System.out.println(
                 "\n --------------------- " + ANSI_BRIGHTYELLOW_STRING + "MAIN MENU" + ANSI_RESET
@@ -103,7 +104,7 @@ public class Admin {
      * input corresponding
      * to the number of the option they chose
      */
-    public static void viewSortedMovies(BookRentalSystem system) {
+    public static void viewSortedMovies(MovieRentalSystem system) {
         int input = 0;
         sortedMenuOptions();
         do {
@@ -161,7 +162,7 @@ public class Admin {
      * input corresponding
      * to the number of the option they chose
      */
-    public static void viewFilteredMovies(BookRentalSystem system) {
+    public static void viewFilteredMovies(MovieRentalSystem system) {
         int input = 0;
         filteredMenuOptions();
         do {
@@ -222,7 +223,7 @@ public class Admin {
      * input corresponding
      * to the number of the option they chose
      */
-    public static void manageSystem(BookRentalSystem system) {
+    public static void manageSystem(MovieRentalSystem system) {
         int input = 0;
         manageSystemOptions();
         do {
@@ -310,7 +311,7 @@ public class Admin {
      * 
      * @param {BookRentalSystem} - represents the system
      */
-    public static void addCustomerToSystem(BookRentalSystem system) {
+    public static void addCustomerToSystem(MovieRentalSystem system) {
         System.out.println(ANSI_YELLOW + "Please enter the name of the customer:" + ANSI_RESET);
         Customer cusToAdd = new Customer(scan.nextLine());
         try {
@@ -353,7 +354,7 @@ public class Admin {
      * @param {BookRentalSystem} - represents the whole system
      * @return - the movie selected from the system
      */
-    public static Movie getMovieFromSystem(BookRentalSystem system) {
+    public static Movie getMovieFromSystem(MovieRentalSystem system) {
         System.out.println(ANSI_GREEN + "The movies in the system are:" + ANSI_RESET);
         printMovies(system.getMovies());
         System.out.println(ANSI_YELLOW + "Please select the number of the movie you would like to select" + ANSI_RESET);
@@ -421,8 +422,9 @@ public class Admin {
     /**
      * this method invokes the necessary code to select a movie from the database
      * whose trailer they would like to view
+     * 
      */
-    public static void playTrailer(BookRentalSystem system) {
+    public static void playTrailer(MovieRentalSystem system) {
         System.out.println(ANSI_YELLOW + "Would you like to watch a trailer for one of these movies? Enter \"y\" if yes"
                 + ANSI_RESET);
         String decision = scan.nextLine();
