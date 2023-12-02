@@ -251,10 +251,12 @@ public class Employee {
                     do {
                         ans = scan.nextLine();
                     } while (!ans.equals("y") && !ans.equals("n"));
+                    double price = toRent.getPrice();
                     if (ans.equals("y")) {
                         System.out.println(ANSI_GREEN + "Price after discount is: " + payRent(toRent, selected) + "$"
                                 + ANSI_RESET);
                     }
+                    System.out.println("Your total is: " + price );
                     system.rentMovie(toRent);
                     selected.rentMovie(toRent);
                     System.out.println(ANSI_GREEN + "Movie rented successfully" + ANSI_RESET);
@@ -379,17 +381,21 @@ public class Employee {
         IDiscountStrategy[] discounts = { new FiveDollarDiscount(), new TenDollarDiscount(), new TwentyDollarDiscount(),
                 new FiftyDollarDiscount() };
         if (c.getPoints() < MINPOINTS)
+        {
+            System.out.println("You dont have enough points!");
             return m.getPrice();
-        int input = 0;
+        }
         while (true) {
             try {
                 System.out.println("Enter the discount you would like to use: \n 1) 5$ \n 2) 10$ \n 3) 20$ \n 4) 50$");
-                input = Integer.parseInt(scan.nextLine());
-                return discounts[input].finalPrice(c, m);
+                int input = Integer.parseInt(scan.nextLine());
+                return discounts[input - 1].finalPrice(c, m);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please select a valid number");
             } catch (InputMismatchException e) {
                 System.out.println("Enter an integer");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
         }
 

@@ -486,4 +486,61 @@ INSERT INTO DigitalMovies (movieID, fileSize, stock) VALUES (18, 1900, 8);
 INSERT INTO DigitalMovies (movieID, fileSize, stock) VALUES (19, 2050, 3);
 INSERT INTO DigitalMovies (movieID, fileSize, stock) VALUES (20, 1800, 2);
 
+CREATE OR REPLACE PACKAGE loading
+AS
+    TYPE cursor_table IS REF CURSOR;
+    PROCEDURE getCustomers(cursor_c IN OUT cursor_table);
+    PROCEDURE getDigitalMovies(cursor_c IN OUT cursor_table);
+    PROCEDURE getPhysicalMovies(cursor_c IN OUT cursor_table);
+END loading;
+/
+CREATE OR REPLACE PACKAGE BODY loading
+AS
+    PROCEDURE getCustomers (cursor_c IN OUT cursor_table)
+    AS 
+    BEGIN
+        OPEN cursor_c FOR
+            SELECT * FROM Moviestore_Customers;
+    END;
+    
+    PROCEDURE getDigitalMovies (cursor_c IN OUT cursor_table)
+    AS 
+    BEGIN
+        OPEN cursor_c FOR
+            SELECT * FROM Movies INNER JOIN DigitalMovies USING(movieID);
+    END;
+    
+    PROCEDURE getPhysicalMovies(cursor_c IN OUT cursor_table)
+    AS 
+    BEGIN
+        OPEN cursor_c FOR
+            SELECT * FROM Movies INNER JOIN DVDs USING(movieID);
+    END;
+END loading;
+/
 DROP TABLE Stores_Products;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

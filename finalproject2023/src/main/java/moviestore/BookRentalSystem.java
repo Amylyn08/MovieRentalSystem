@@ -38,6 +38,26 @@ public class BookRentalSystem {
         }
     }
 
+    /**
+     * this method allows the user to add customer into the system
+     */
+    public void addCustomer(Customer cusToAdd)
+    {  
+        if (this.customers.contains(cusToAdd))
+        {
+            throw new IllegalArgumentException("This customer exists!");
+        }
+        this.customers.add(cusToAdd);
+    }
+
+    /**
+     * this method allows the user to remove customer into the system
+     */
+    public void removeCustomer(Customer cusToRemove)
+    {
+        this.customers.remove(cusToRemove);
+    }
+
     
     /** 
      * Retrieves list of customers
@@ -141,9 +161,15 @@ public class BookRentalSystem {
         if (this.movies.contains(m)) {
             throw new IllegalArgumentException("This movie already exists in the database!");
         }
-        if (!(movies.contains(m))) {
-            this.movies.add(m);
-        }
+        this.movies.add(m);
+    }
+
+    /**
+     * this method removes a movie from the system!
+     */
+    public void removeMovie(Movie m)
+    {
+        this.movies.remove(m);
     }
     /**
      * Finds a movie in a list of movies.

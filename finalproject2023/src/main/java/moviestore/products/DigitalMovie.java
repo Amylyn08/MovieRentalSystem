@@ -33,8 +33,21 @@ public class DigitalMovie extends Movie {
     }
 
     /**
+     * this overloaded constructor is used to add a new movie into the system.
+     */
+    public DigitalMovie(
+    String title, String genre,
+    int durationMins, String summary, double price, int fileSize, int stock, String URL) {
+        super(title, genre,
+                durationMins, summary, price, stock, URL);
+        if (fileSize <= 0)
+                throw new IllegalArgumentException("filesize cannot be less than or equal to 0!");
+        this.fileSize = fileSize;
+    }
+
+    /**
      * Copies over attributes from a DigitalMovie object
-     * @param m - the DigitalMovie object who's attributes are being used.
+     * @param - the DigitalMovie object who's attributes are being used.
      */
     public DigitalMovie(DigitalMovie m) {
         this(m.getTitle(), m.getGenre(),
@@ -45,7 +58,7 @@ public class DigitalMovie extends Movie {
 
     /**
      * overrides toString
-     * @retn - String wih toString from parent object + the file size of the digital movie object.
+     * @return - String wih toString from parent object + the file size of the digital movie object.
      */
     @Override
     public String toString() {
