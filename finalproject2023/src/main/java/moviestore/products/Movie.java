@@ -7,7 +7,7 @@ import java.net.URISyntaxException;
 
 /**
  * The `Movie` class represents a generic movie with various attributes,
- * with relevant methods to manipulate the atrributes of a Movie object  
+ * with relevant methods to manipulate the atrributes of a Movie object
  */
 public class Movie {
     private String title;
@@ -22,18 +22,18 @@ public class Movie {
     private String URL;
 
     /**
-    * Constructs a new Movie object with the specified attributes.
-    *
-    * @param title The title of the movie.
-    * @param genre The genre of the movie.
-    * @param durationMins The duration of the movie in minutes.
-    * @param summary A brief summary or description of the movie.
-    * @param additionOfRating The total sum of ratings for the movie.
-    * @param numRatings The number of ratings received by the movie.
-    * @param price The price of the movie.
-    * @param stock The current stock or inventory of the movie.
-    * @param URL The URL or link associated with the movie.
-    */
+     * Constructs a new Movie object with the specified attributes.
+     *
+     * @param title            The title of the movie.
+     * @param genre            The genre of the movie.
+     * @param durationMins     The duration of the movie in minutes.
+     * @param summary          A brief summary or description of the movie.
+     * @param additionOfRating The total sum of ratings for the movie.
+     * @param numRatings       The number of ratings received by the movie.
+     * @param price            The price of the movie.
+     * @param stock            The current stock or inventory of the movie.
+     * @param URL              The URL or link associated with the movie.
+     */
     public Movie(String title, String genre,
             int durationMins, String summary, double additionOfRating,
             int numRatings, double price, int stock, String URL) {
@@ -48,8 +48,10 @@ public class Movie {
         this.stock = stock;
         this.URL = URL;
     }
+
     /**
-     *Retrieve stock of a Movie object
+     * Retrieve stock of a Movie object
+     * 
      * @return - int representingn the stock available.
      */
     public int getStock() {
@@ -57,7 +59,8 @@ public class Movie {
     }
 
     /**
-     * Retrieve title of movie. 
+     * Retrieve title of movie.
+     * 
      * @return - returns String representing title.
      */
     public String getTitle() {
@@ -66,6 +69,7 @@ public class Movie {
 
     /**
      * Retrieves price of Movie
+     * 
      * @return - returns double presenting price.
      */
     public double getPrice() {
@@ -74,6 +78,7 @@ public class Movie {
 
     /**
      * Retrieves sum of rating for a movie.
+     * 
      * @return - returns double representing the addition of ratings.
      */
     public double getAdditionOfRating() {
@@ -81,22 +86,26 @@ public class Movie {
     }
 
     /**
-     *Retrieves the number for how many people have rated.
+     * Retrieves the number for how many people have rated.
+     * 
      * @return - returns int representing the number of ratings
      */
     public int getNumRatings() {
         return this.numRatings;
     }
+
     /**
      * Retrieves URL of the movie
-     * @return - String representing the URL of the movie 
+     * 
+     * @return - String representing the URL of the movie
      */
     public String getURL() {
         return this.URL;
     }
 
     /**
-     * Retrieves the genre of the movie 
+     * Retrieves the genre of the movie
+     * 
      * @return - returns String representing genre
      */
     public String getGenre() {
@@ -104,7 +113,8 @@ public class Movie {
     }
 
     /**
-     * Retrieves the duration in minutes of a movie object 
+     * Retrieves the duration in minutes of a movie object
+     * 
      * @return - returns int representing duration of the movie
      */
     public int getDurationMins() {
@@ -113,6 +123,7 @@ public class Movie {
 
     /**
      * Retrieves movie summary of movie object.
+     * 
      * @return - returns String representing summary of the movie.
      */
     public String getSummary() {
@@ -121,6 +132,7 @@ public class Movie {
 
     /**
      * Retrieves the rating of a movie object.
+     * 
      * @return - returns double representing the rating of the movie.
      */
     public double getStarRating() {
@@ -130,8 +142,10 @@ public class Movie {
     /**
      * this method will add a rating to the movie and recalculate the rating, add to
      * additionOfRatings and add to numRatings
+     * 
      * @param rating - the rating to be added to the movie object.
-     * @throws IllegalArgumentException - If the rating being given is below 0.5 or above 5 stars. 
+     * @throws IllegalArgumentException - If the rating being given is below 0.5 or
+     *                                  above 5 stars.
      */
     public void addRating(double rating) {
         if (rating > 5 || rating < 0.5) {
@@ -144,20 +158,23 @@ public class Movie {
 
     /**
      * overrides toString
-     *@return - String that holds relevant Movie information.
+     * 
+     * @return - String that holds relevant Movie information.
      */
     @Override
     public String toString() {
         return ("Movie Title: " + this.title + "\n Genre: " + this.genre + "\n Duration: " + this.durationMins
                 + "\n Summary: " + this.summary + "\n Rating: " + this.starRating + "\n Stock: " + this.stock +
-                "\n Price: "+this.price
+                "\n Price: " + this.price
                 + "\n");
 
     }
 
     /**
-     *Minuses 1 from the stock when a movie is renting
-     *@throws IllegalArgumentException - when there isn't enough stock in the database.
+     * Minuses 1 from the stock when a movie is renting
+     * 
+     * @throws IllegalArgumentException - when there isn't enough stock in the
+     *                                  database.
      */
     public void rentMovie() {
         if (this.stock <= 0) {
@@ -167,14 +184,16 @@ public class Movie {
     }
 
     /**
-     *Adds 1 to the stock when a movie is returned/
+     * Adds 1 to the stock when a movie is returned/
      */
     public void returnMovie() {
         this.stock = this.stock + 1;
     }
-    
+
     /**
-     *Opens a page on user's default browser with the URL field of a Movie object 
+     * Opens a page on user's default browser with the URL field of a Movie object
+     * Reference:
+     * https://stackoverflow.com/questions/5226212/how-to-open-url-in-default-webbrowser-using-java
      */
     public void playTrailer() {
         if (Desktop.isDesktopSupported()) {
