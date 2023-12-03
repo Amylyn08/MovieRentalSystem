@@ -23,6 +23,34 @@ public class MovieTest {
                 assertEquals(4.36, m.getStarRating(), 0.0001);
         }
 
+        @Test (expected = IllegalArgumentException.class)
+        public void testMovieConstructorNegativePrice() {
+                Movie m = new DVD("The Lost City", "Action-Adventure", 145,
+                                "An archeological expedition races against a rival group to uncover a lost city's secrets.",
+                                -40.50, 5, "https://www.youtube.com/watch?v=nfKO9rYDmE8");
+        }
+
+        @Test (expected = IllegalArgumentException.class)
+        public void testMovieConstructorNegativeduration() {
+                Movie m = new DVD("The Lost City", "Action-Adventure", -145,
+                                "An archeological expedition races against a rival group to uncover a lost city's secrets.",
+                                40.50, 5, "https://www.youtube.com/watch?v=nfKO9rYDmE8");
+        }
+
+        @Test (expected = IllegalArgumentException.class)
+        public void testMovieConstructorNegativeStock() {
+                Movie m = new DVD("The Lost City", "Action-Adventure", 145,
+                                "An archeological expedition races against a rival group to uncover a lost city's secrets.",
+                                40.50, -5, "https://www.youtube.com/watch?v=nfKO9rYDmE8");
+        }
+
+        @Test (expected = IllegalArgumentException.class)
+        public void testMovieConstructorNegativeFileSize() {
+                Movie m = new DigitalMovie("The Lost City", "Action-Adventure", 145,
+                                "An archeological expedition races against a rival group to uncover a lost city's secrets.",
+                                40.50, -1000 ,5, "https://www.youtube.com/watch?v=nfKO9rYDmE8");
+        }
+
         @Test
         public void testMovieModifyStarRating() {
                 Movie m = new DVD("The Lost City", "Action-Adventure", 145,
