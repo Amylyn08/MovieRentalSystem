@@ -1,6 +1,6 @@
 package moviestore;
 
-import java.util.InputMismatchException;
+import java.util.*;
 import java.util.List;
 import java.util.Scanner;
 
@@ -372,7 +372,7 @@ public class Employee {
                 return filtered.get(input - 1);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(ANSI_RED + "Please select a valid number" + ANSI_RESET);
-            } catch (InputMismatchException e) {
+            } catch (NumberFormatException e) {
                 System.out.println(ANSI_RED + "Enter a number" + ANSI_RESET);
             }
         }
@@ -403,7 +403,7 @@ public class Employee {
                 return discounts[input - 1].finalPrice(c, m);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Please select a valid number");
-            } catch (InputMismatchException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Enter an integer");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -430,7 +430,7 @@ public class Employee {
                 return cusMovies.get(input - 1);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(ANSI_RED + "Please select a valid number" + ANSI_RESET);
-            } catch (InputMismatchException e) {
+            } catch (NumberFormatException e) {
                 System.out.println(ANSI_RED + "Enter an integer" + ANSI_RESET);
             }
         }
@@ -487,7 +487,7 @@ public class Employee {
             } catch (IllegalArgumentException e) {
                 System.out.println(ANSI_RED + e.getMessage() + ANSI_RESET);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println(ANSI_RED + "Invalid movie number :( try again!)" + ANSI_RESET);
+                System.out.println(ANSI_RED + "Invalid movie number :( try again!" + ANSI_RESET);
             }
         }
     }

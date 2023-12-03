@@ -2,17 +2,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Admin",
-            "request": "launch",
-            "mainClass": "moviestore.Admin",
-            "projectName": "assignment5"
-        },
-        {
-            "type": "java",
             "name": "Employee",
             "request": "launch",
             "mainClass": "moviestore.Employee",
-            "projectName": "assignment5"
+            "projectName": "finalproject2023"
         },
         {
             "type": "java",

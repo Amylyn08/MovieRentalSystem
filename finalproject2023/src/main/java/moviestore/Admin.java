@@ -14,6 +14,7 @@ import moviestore.exceptions.LoaderFailedException;
 import moviestore.loader.FileLoader;
 import moviestore.loader.IDatabase;
 import moviestore.products.*;
+import java.io.IOException;
 
 /** Allows admin to use movie services and manipulate the data(s). */
 public class Admin {
@@ -47,7 +48,7 @@ public class Admin {
         System.out.println("1. View all movies");
         System.out.println("2. View movies sorted by a criteria");
         System.out.println("3. View movies filtered by a criteria");
-        System.out.println("4. Manage customers");
+        System.out.println("4. Manage system");
         System.out.println("5. EXIT \n");
         System.out.println(ANSI_YELLOW + "Enter the number of the option you would like to select: " + ANSI_RESET);
         do {
@@ -76,6 +77,14 @@ public class Admin {
                     break;
                 case 5:
                     System.out.println(ANSI_GREEN + "Chosen \"EXIT\". System exiting.. Goodbye!!" + ANSI_RESET);
+                    try {
+                        system.updateMovies();
+                        system.updateCustomers();
+                    }
+                    catch (IOException e)
+                    {
+                        System.out.println("Could not rewrite movies into csv file");
+                    }
                     System.exit(0);
                 default:
                     System.out.println(ANSI_RED + "Invalid option. Please try again." + ANSI_RESET);
@@ -151,8 +160,8 @@ public class Admin {
         System.out.println("\n------------------------ " + ANSI_BRIGHTYELLOW_STRING + "FILTER MENU" + ANSI_RESET
                 + " -------------------------- ");
         System.out.println("1. View movies fltered by available");
-        System.out.println("2. View movies sorted by genre");
-        System.out.println("3. View movies sorted by title");
+        System.out.println("2. View movies filtered by genre");
+        System.out.println("3. View movies filtered by title");
         System.out.println("4. BACK \n");
         System.out.println(ANSI_YELLOW + "Enter the number of the option you would like to select: " + ANSI_RESET);
     }
@@ -246,18 +255,15 @@ public class Admin {
                 case 3:
                     System.out.println("\033c");
                     Movie movieToRemove = getMovieFromSystem(system);
-                    system.removeMovie(movieToRemove);
+                    system.setFilter(new FilterByTitle(movieToRemove.getTitle()));
+                    List<Movie> filtered = system.getFilter().filterMovies(system.getMovies());
+                    system.removeMovie(filtered);
                     System.out.println(ANSI_GREEN + "Movie removed successfully!" + ANSI_RESET);
                     break;
                 case 4:
                     System.out.println("\033c");
-                    Movie toAdd = createMovie();
+                    createMovie(system);
                     System.out.println(ANSI_GREEN + "Movie added successfully!" + ANSI_RESET);
-                    try {
-                        system.addMovie(toAdd);
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(ANSI_RED + e.getMessage() + ANSI_RESET);
-                    }
                     break;
                 case 5:
                     System.out.println("\033c");
@@ -378,7 +384,7 @@ public class Admin {
      * 
      * @return - returns the new movie to be added to the database
      */
-    public static Movie createMovie() {
+    public static void createMovie(MovieRentalSystem system) {
         System.out.println(ANSI_YELLOW + "Enter the title of the movie: " + ANSI_RESET);
         String title = scan.nextLine();
         System.out.println(ANSI_YELLOW + "Enter the genre of the movie: " + ANSI_RESET);
@@ -395,22 +401,17 @@ public class Admin {
                 int duration = Integer.parseInt(scan.nextLine());
                 System.out.println(ANSI_YELLOW + "Enter the price of the movie: " + ANSI_RESET);
                 double price = Double.parseDouble(scan.nextLine());
-                System.out.println(ANSI_YELLOW + "Enter the stock of the movie: " + ANSI_RESET);
+                System.out.println(ANSI_YELLOW + "Enter the stock of the digital movie: " + ANSI_RESET);
                 int stock = Integer.parseInt(scan.nextLine());
-                System.out.println(ANSI_YELLOW + "Is it a digital movie (enter 1) or a DVD (enter 2)?" + ANSI_RESET);
-                int choice = Integer.parseInt(scan.nextLine());
-                switch (choice) {
-                    case 1:
-                        System.out.println(ANSI_YELLOW + "Enter the filesize of the movie: " + ANSI_RESET);
-                        int filesize = Integer.parseInt(scan.nextLine());
-                        return (new DigitalMovie(title, genre,
+                System.out.println(ANSI_YELLOW + "Enter the stock of the DVD movie: " + ANSI_RESET);
+                int stockDVD = Integer.parseInt(scan.nextLine());
+                System.out.println(ANSI_YELLOW + "Enter the filesize of the movie: " + ANSI_RESET);
+                int filesize = Integer.parseInt(scan.nextLine());
+                system.addMovie(new DigitalMovie(title, genre,
                                 duration, description, price, filesize, stock, url));
-                    case 2:
-                        return (new DVD(title, genre,
-                                duration, description, price, stock, url));
-                    default:
-                        System.out.println(ANSI_RED + "Input invalid! choose a 1 or 2" + ANSI_RESET);
-                }
+                system.addMovie(new DVD(title, genre,
+                                duration, description, price, stockDVD, url));
+                break;
             } catch (NumberFormatException e) {
                 System.out.println(ANSI_RED + "Please enter the appropriate numeric input" + ANSI_RESET);
             } catch (IllegalArgumentException e) {
