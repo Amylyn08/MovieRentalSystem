@@ -1,6 +1,5 @@
 package moviestore;
 
-import java.io.IOException;
 import java.util.*;
 
 import moviestore.products.DVD;
@@ -18,7 +17,6 @@ public class MovieRentalSystem {
     private List<Customer> customers;
     private ISortBy comparer;
     private IFilterBy filter;
-    private Modifier modify;
 
     /**
      * Constructor to initialize lists of movies and customers.
@@ -41,7 +39,6 @@ public class MovieRentalSystem {
             this.customers.add(new Customer(c));
         }
 
-        this.modify = new Modifier();
     }
 
     /**
@@ -184,26 +181,6 @@ public class MovieRentalSystem {
         {
             this.movies.remove(toRemove);
         }
-    }
-
-    /**
-     * calls the method in modifier to rewrite all movies in csv file
-     * @throws IOException
-     */
-    public void updateMovies() throws IOException
-    {
-        Modifier m = new Modifier();
-        m.addNewMovies(this.movies);
-    }
-
-    /**
-     * calls the method in modifier to rewrite all customers in csv file
-     * @throws IOException
-     */
-    public void updateCustomers() throws IOException
-    {
-        Modifier m = new Modifier();
-        m.addNewCustomers(this.customers);
     }
 
     /**

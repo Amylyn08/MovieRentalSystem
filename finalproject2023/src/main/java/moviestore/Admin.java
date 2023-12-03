@@ -78,8 +78,9 @@ public class Admin {
                 case 5:
                     System.out.println(ANSI_GREEN + "Chosen \"EXIT\". System exiting.. Goodbye!!" + ANSI_RESET);
                     try {
-                        system.updateMovies();
-                        system.updateCustomers();
+                        Modifier m = new Modifier();
+                        m.addNewMovies(system.getMovies());
+                        m.addNewCustomers(system.getCustomers());
                     }
                     catch (IOException e)
                     {
