@@ -1,6 +1,12 @@
 {
     "configurations": [
-    
+        {
+            "type": "java",
+            "name": "Admin",
+            "request": "launch",
+            "mainClass": "moviestore.Admin",
+            "projectName": "assignment5"
+        },
         {
             "type": "java",
             "name": "Employee",

@@ -2,7 +2,6 @@ package moviestore.loader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.*;
@@ -26,6 +25,7 @@ public class SQLLoader implements IDatabase {
 
     /**
      * this method establishes the connection to the database
+     * 
      * @param {String} - represents the username
      * @param {String} - represents the password
      */
@@ -40,7 +40,8 @@ public class SQLLoader implements IDatabase {
     }
 
     /**
-     * this method loads all the movies from the database through 2 queries: 1 for digital and 1 for DVDs
+     * this method loads all the movies from the database through 2 queries: 1 for
+     * digital and 1 for DVDs
      */
     public List<Movie> loadMovies() throws LoaderFailedException {
         try {
@@ -102,8 +103,8 @@ public class SQLLoader implements IDatabase {
                         rs.getInt("points")));
             }
             return customers;
-    
-        } catch(SQLException e) {
+
+        } catch (SQLException e) {
             throw new LoaderFailedException(e);
         }
     }

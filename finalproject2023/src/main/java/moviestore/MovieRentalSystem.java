@@ -8,9 +8,10 @@ import moviestore.products.Movie;
 import moviestore.display.*;
 
 /**
- * This class is responsible for the logic of the application, and data manipulation of List objects
+ * This class is responsible for the logic of the application, and data
+ * manipulation of List objects
  */
-public class BookRentalSystem {
+public class MovieRentalSystem {
 
     private List<Movie> movies;
     private List<Customer> customers;
@@ -19,10 +20,11 @@ public class BookRentalSystem {
 
     /**
      * Constructor to initialize lists of movies and customers.
-     * @param movies - Reprenting movie object.
+     * 
+     * @param movies    - Reprenting movie object.
      * @param customers - Representing customer object.
      */
-    public BookRentalSystem(List<Movie> movies, List<Customer> customers) {
+    public MovieRentalSystem(List<Movie> movies, List<Customer> customers) {
         this.movies = new ArrayList<Movie>();
         for (Movie m : movies) {
             if (m instanceof DVD) {
@@ -41,10 +43,8 @@ public class BookRentalSystem {
     /**
      * this method allows the user to add customer into the system
      */
-    public void addCustomer(Customer cusToAdd)
-    {  
-        if (this.customers.contains(cusToAdd))
-        {
+    public void addCustomer(Customer cusToAdd) {
+        if (this.customers.contains(cusToAdd)) {
             throw new IllegalArgumentException("This customer exists!");
         }
         this.customers.add(cusToAdd);
@@ -53,57 +53,58 @@ public class BookRentalSystem {
     /**
      * this method allows the user to remove customer into the system
      */
-    public void removeCustomer(Customer cusToRemove)
-    {
+    public void removeCustomer(Customer cusToRemove) {
         this.customers.remove(cusToRemove);
     }
 
-    
-    /** 
+    /**
      * Retrieves list of customers
-     * @return List<Customer> 
+     * 
+     * @return List<Customer>
      */
     public List<Customer> getCustomers() {
         return (this.customers);
     }
 
-    
-    /** 
+    /**
      * Retrieves list of movies.
+     * 
      * @return List<Movie>
      */
     public List<Movie> getMovies() {
         return (this.movies);
     }
 
-    
-    /** 
+    /**
      * Sets the comparer field of the class, with an ISortBy type strategy.
+     * 
      * @param newMethod
      */
     public void setSorting(ISortBy newMethod) {
         this.comparer = newMethod;
     }
 
-    
-    /** 
+    /**
      * Sets the filter field with a IFilterBy type strategy
+     * 
      * @param newMethod
      */
     public void setFilter(IFilterBy newMethod) {
         this.filter = newMethod;
     }
 
-    
-    /** 
+    /**
      * Retrieves teh type of filter on the class.
+     * 
      * @return IFilterBy - The filter strategry
      */
     public IFilterBy getFilter() {
         return (this.filter);
     }
+
     /**
-     * function responsible for sorting by using the swap method,  using the comparer field.
+     * function responsible for sorting by using the swap method, using the comparer
+     * field.
      */
     public void selectionSort() {
         for (int i = 0; i < this.movies.size() - 1; i++) {
@@ -119,7 +120,8 @@ public class BookRentalSystem {
 
     /**
      * This method swaps two objects with two different indexes
-     * @param i 
+     * 
+     * @param i
      * @param j
      */
     private void swap(int i, int index) {
@@ -129,7 +131,9 @@ public class BookRentalSystem {
     }
 
     /**
-     * Lessens the stock when is called for a certain movie, calls rentMovie() from movie class.
+     * Lessens the stock when is called for a certain movie, calls rentMovie() from
+     * movie class.
+     * 
      * @param m - The movie object that is getting rented
      */
     public void rentMovie(Movie m) {
@@ -141,7 +145,9 @@ public class BookRentalSystem {
     }
 
     /**
-     * increments the stock when is called for a certain movie, calls returnMovie() from Movie class
+     * increments the stock when is called for a certain movie, calls returnMovie()
+     * from Movie class
+     * 
      * @param m - the movie object that is being returned.
      */
     public void returnMovie(Movie m) {
@@ -154,8 +160,10 @@ public class BookRentalSystem {
 
     /**
      * This method adds a movie to the list of movies.
+     * 
      * @param m - the movie object that is getting added.
-     * @throws IllegalArgumentException - If the movie already exists in the list of movies.
+     * @throws IllegalArgumentException - If the movie already exists in the list of
+     *                                  movies.
      */
     public void addMovie(Movie m) {
         if (this.movies.contains(m)) {
@@ -167,15 +175,17 @@ public class BookRentalSystem {
     /**
      * this method removes a movie from the system!
      */
-    public void removeMovie(Movie m)
-    {
+    public void removeMovie(Movie m) {
         this.movies.remove(m);
     }
+
     /**
      * Finds a movie in a list of movies.
-     * @param title - Title of movie.
+     * 
+     * @param title  - Title of movie.
      * @param medium - Medium of the movie.
-     * @throws IllegalArgumentException - If the movie does not exist in the database.
+     * @throws IllegalArgumentException - If the movie does not exist in the
+     *                                  database.
      * @return - The movie that is a match.
      */
     public Movie findMovie(String title, String medium) {

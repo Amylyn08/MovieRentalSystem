@@ -21,6 +21,9 @@ import moviestore.loader.FileLoader;
 import moviestore.loader.IDatabase;
 import moviestore.products.Movie;
 
+/**
+ * Functinality is to allow employees to use the movie services.
+ */
 public class Employee {
     public static final Scanner scan = new Scanner(System.in);
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -34,7 +37,7 @@ public class Employee {
         try {
             List<Movie> movies = loader.loadMovies();
             List<Customer> customers = loader.loadCustomers();
-            BookRentalSystem movieSystem = new BookRentalSystem(movies, customers);
+            MovieRentalSystem movieSystem = new MovieRentalSystem(movies, customers);
             mainMenu(movieSystem);
         } catch (LoaderFailedException e) {
             System.out.println(ANSI_RED + "movies could not be properly loaded" + ANSI_RESET);
@@ -44,7 +47,7 @@ public class Employee {
     /**
      * this function represents the main menu with MAIN FUNCTIONS
      */
-    public static void mainMenu(BookRentalSystem system) {
+    public static void mainMenu(MovieRentalSystem system) {
         int input = 0;
         System.out.println(
                 "\n --------------------- " + ANSI_BRIGHTYELLOW_STRING + "MAIN MENU" + ANSI_RESET
@@ -115,7 +118,7 @@ public class Employee {
      * input corresponding
      * to the number of the option they chose
      */
-    public static void viewSortedMovies(BookRentalSystem system) {
+    public static void viewSortedMovies(MovieRentalSystem system) {
         int input = 0;
         sortedMenuOptions();
         do {
@@ -173,7 +176,7 @@ public class Employee {
      * input corresponding
      * to the number of the option they chose
      */
-    public static void viewFilteredMovies(BookRentalSystem system) {
+    public static void viewFilteredMovies(MovieRentalSystem system) {
         int input = 0;
         filteredMenuOptions();
         do {
@@ -232,7 +235,7 @@ public class Employee {
      * their input corresponding
      * to the number of the option they chose
      */
-    public static void manageCustomers(BookRentalSystem system) {
+    public static void manageCustomers(MovieRentalSystem system) {
         int input = 0;
         Customer selected = getCustomer(system.getCustomers());
         customerMenuOptions();
@@ -256,7 +259,7 @@ public class Employee {
                         System.out.println(ANSI_GREEN + "Price after discount is: " + payRent(toRent, selected) + "$"
                                 + ANSI_RESET);
                     }
-                    System.out.println("Your total is: " + price );
+                    System.out.println("Your total is: " + price);
                     system.rentMovie(toRent);
                     selected.rentMovie(toRent);
                     System.out.println(ANSI_GREEN + "Movie rented successfully" + ANSI_RESET);
@@ -291,7 +294,11 @@ public class Employee {
     /**********************************************
      * HELPER METHODS
      ******************************************/
-
+    /**
+     * Prints all the movies.
+     * 
+     * @param movies list of movies
+     */
     public static void printMovies(List<Movie> movies) {
         int index = 1;
         for (Movie m : movies) {
@@ -302,6 +309,11 @@ public class Employee {
             System.out.println(ANSI_RED + "No movies available!" + ANSI_RESET);
     }
 
+    /**
+     * Prints all the customer objects in list.
+     * 
+     * @param cus List of customers
+     */
     public static void printCustomers(List<Customer> cus) {
         int index = 1;
         for (Customer c : cus) {
@@ -316,7 +328,7 @@ public class Employee {
      * this method allows the employee to select which customer
      * they would like to manage
      * 
-     * @param {BookRentalSystem} - represents the whole system
+     * @param {MovieRentalSystem} - represents the whole system
      * @return - the movie to be returned
      */
     public static Customer getCustomer(List<Customer> customers) {
@@ -344,10 +356,10 @@ public class Employee {
      * the DB
      * due to the use of the filter.
      * 
-     * @param {BookRentalSystem} - represents the whole system
+     * @param {MovieRentalSystem} - represents the whole system
      * @return - the movie to be returned
      */
-    public static Movie getMovie(BookRentalSystem system) {
+    public static Movie getMovie(MovieRentalSystem system) {
         System.out.println(ANSI_GREEN + "The movies that have enough stock are:" + ANSI_RESET);
         system.setFilter(new FilterByAvailable());
         List<Movie> filtered = system.getFilter().filterMovies(system.getMovies());
@@ -380,8 +392,7 @@ public class Employee {
         int MINPOINTS = 10000;
         IDiscountStrategy[] discounts = { new FiveDollarDiscount(), new TenDollarDiscount(), new TwentyDollarDiscount(),
                 new FiftyDollarDiscount() };
-        if (c.getPoints() < MINPOINTS)
-        {
+        if (c.getPoints() < MINPOINTS) {
             System.out.println("You dont have enough points!");
             return m.getPrice();
         }
@@ -428,9 +439,9 @@ public class Employee {
     /**
      * This function plays a trailer for any movie that the user wishes.
      * 
-     * @param system - the manipulable BookRentalSystem object.
+     * @param system - the manipulable MovieRentalSystem object.
      */
-    public static void playTrailer(BookRentalSystem system) {
+    public static void playTrailer(MovieRentalSystem system) {
         System.out.println(ANSI_YELLOW
                 + "Would you like to watch a trailer for one of these movies? Enter \"y\" if yes, anything else if no"
                 + ANSI_RESET);
@@ -459,9 +470,9 @@ public class Employee {
      * This function that adds a rating to a movie, taking in user input to pick a
      * movie and a desired rating.
      * 
-     * @param system - The manipulatable BookRentalSystem object
+     * @param system - The manipulatable MovieRentalSystem object
      */
-    public static void addRatingtoMovie(BookRentalSystem system) {
+    public static void addRatingtoMovie(MovieRentalSystem system) {
         while (true) {
             try {
                 System.out.println(ANSI_YELLOW + "Enter number of movie to rate" + ANSI_RESET);

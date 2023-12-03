@@ -1,12 +1,8 @@
 package moviestore;
+
 import java.util.List;
 import java.util.Scanner;
 
-import moviestore.discounts.FiftyDollarDiscount;
-import moviestore.discounts.FiveDollarDiscount;
-import moviestore.discounts.IDiscountStrategy;
-import moviestore.discounts.TenDollarDiscount;
-import moviestore.discounts.TwentyDollarDiscount;
 import moviestore.display.FilterByAvailable;
 import moviestore.display.FilterByGenre;
 import moviestore.display.FilterByTitle;
@@ -17,37 +13,43 @@ import moviestore.display.SortByTitle;
 import moviestore.exceptions.LoaderFailedException;
 import moviestore.loader.FileLoader;
 import moviestore.loader.IDatabase;
-import moviestore.products.Movie;
 import moviestore.products.*;
 
+/** Allows admin to use movie services and manipulate the data(s). */
 public class Admin {
     public static final Scanner scan = new Scanner(System.in);
-    public static void main(String[] args)
-    {
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BRIGHTYELLOW_STRING = "\033[1;93m";
+
+    public static void main(String[] args) {
         IDatabase loader = new FileLoader();
         try {
             List<Movie> movies = loader.loadMovies();
             List<Customer> customers = loader.loadCustomers();
-            BookRentalSystem movieSystem = new BookRentalSystem(movies, customers);
+            MovieRentalSystem movieSystem = new MovieRentalSystem(movies, customers);
             mainMenu(movieSystem);
         } catch (LoaderFailedException e) {
-            System.out.println("movies could not be properly loaded");
+            System.out.println(ANSI_RED + "movies could not be properly loaded" + ANSI_RESET);
         }
     }
 
     /**
      * this function represents the main menu with MAIN FUNCTIONS
      */
-    public static void mainMenu(BookRentalSystem system) {
+    public static void mainMenu(MovieRentalSystem system) {
         int input = 0;
         System.out.println(
-                "\n ------------------------------------------------------------- \n Here are your options.. choose wisely. ");
+                "\n --------------------- " + ANSI_BRIGHTYELLOW_STRING + "MAIN MENU" + ANSI_RESET
+                        + " ----------------------- \n Here are your options.. choose wisely: ");
         System.out.println("1. View all movies");
         System.out.println("2. View movies sorted by a criteria");
         System.out.println("3. View movies filtered by a criteria");
         System.out.println("4. Manage customers");
         System.out.println("5. EXIT \n");
-        System.out.println("Enter the number of the option you would like to select: ");
+        System.out.println(ANSI_YELLOW + "Enter the number of the option you would like to select: " + ANSI_RESET);
         do {
 
             try {
@@ -73,10 +75,10 @@ public class Admin {
                     manageSystem(system);
                     break;
                 case 5:
-                    System.out.println("Chosen \"EXIT\". System exiting.. Goodbye!!");
+                    System.out.println(ANSI_GREEN + "Chosen \"EXIT\". System exiting.. Goodbye!!" + ANSI_RESET);
                     System.exit(0);
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println(ANSI_RED + "Invalid option. Please try again." + ANSI_RESET);
             }
 
         } while (true);
@@ -87,13 +89,14 @@ public class Admin {
      * this function displays the menu options for sorting
      */
     public static void sortedMenuOptions() {
-        System.out.println("\n------------------------------------------------------------- ");
+        System.out.println("\n-------------------------" + ANSI_BRIGHTYELLOW_STRING + "SORT MENU" + ANSI_RESET
+                + "----------------------------- ");
         System.out.println("1. View movies sorted by duration");
         System.out.println("2. View movies sorted by price");
         System.out.println("3. View movies sorted by rating");
         System.out.println("4. View movies sorted by title");
         System.out.println("5. BACK \n");
-        System.out.println("Enter the number of the option you would like to select: ");
+        System.out.println(ANSI_YELLOW + "Enter the number of the option you would like to select: " + ANSI_RESET);
     }
 
     /**
@@ -101,7 +104,7 @@ public class Admin {
      * input corresponding
      * to the number of the option they chose
      */
-    public static void viewSortedMovies(BookRentalSystem system) {
+    public static void viewSortedMovies(MovieRentalSystem system) {
         int input = 0;
         sortedMenuOptions();
         do {
@@ -132,7 +135,7 @@ public class Admin {
                     mainMenu(system);
                     break;
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println(ANSI_RED + "Invalid option. Please try again." + ANSI_RESET);
                     continue;
             }
             system.selectionSort();
@@ -145,12 +148,13 @@ public class Admin {
      * this function displays the menu options for filtering
      */
     public static void filteredMenuOptions() {
-        System.out.println("\n------------------------------------------------------------- ");
+        System.out.println("\n------------------------ " + ANSI_BRIGHTYELLOW_STRING + "FILTER MENU" + ANSI_RESET
+                + " -------------------------- ");
         System.out.println("1. View movies fltered by available");
         System.out.println("2. View movies sorted by genre");
         System.out.println("3. View movies sorted by title");
         System.out.println("4. BACK \n");
-        System.out.println("Enter the number of the option you would like to select: ");
+        System.out.println(ANSI_YELLOW + "Enter the number of the option you would like to select: " + ANSI_RESET);
     }
 
     /**
@@ -158,7 +162,7 @@ public class Admin {
      * input corresponding
      * to the number of the option they chose
      */
-    public static void viewFilteredMovies(BookRentalSystem system) {
+    public static void viewFilteredMovies(MovieRentalSystem system) {
         int input = 0;
         filteredMenuOptions();
         do {
@@ -170,18 +174,18 @@ public class Admin {
             switch (input) {
                 case 1:
                     System.out.println("\033c");
-                    System.out.println("The movies that have enough stock are:");
+                    System.out.println(ANSI_GREEN + "The movies that have enough stock are:" + ANSI_RESET);
                     system.setFilter(new FilterByAvailable());
                     break;
                 case 2:
                     System.out.println("\033c");
-                    System.out.println("Enter the genre: ");
+                    System.out.println(ANSI_YELLOW + "Enter the genre: " + ANSI_RESET);
                     String genre = scan.nextLine();
                     system.setFilter(new FilterByGenre(genre));
                     break;
                 case 3:
                     System.out.println("\033c");
-                    System.out.println("Enter the title snippet: ");
+                    System.out.println(ANSI_YELLOW + "Enter the title snippet: " + ANSI_RESET);
                     String titleSnip = scan.nextLine();
                     system.setFilter(new FilterByTitle(titleSnip));
                     break;
@@ -190,7 +194,7 @@ public class Admin {
                     mainMenu(system);
                     break;
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println(ANSI_RED + "Invalid option. Please try again." + ANSI_RESET);
                     continue;
             }
             List<Movie> filtered = system.getFilter().filterMovies(system.getMovies());
@@ -203,21 +207,23 @@ public class Admin {
      * this function displays the menu options for managing the system
      */
     public static void manageSystemOptions() {
-        System.out.println("\n------------------------------------------------------------- ");
+        System.out.println("\n------------------" + ANSI_BRIGHTYELLOW_STRING + "MANAGE MENU" + ANSI_RESET
+                + "------------------------ ");
         System.out.println("1. Remove a customer");
         System.out.println("2. Add a customer");
         System.out.println("3. Remove a movie");
         System.out.println("4. Add a movie");
         System.out.println("5. BACK \n");
-        System.out.println("Enter the number of the option you would like to select: ");
+        System.out.println(ANSI_YELLOW + "Enter the number of the option you would like to select: " + ANSI_RESET);
     }
 
     /**
-     * this method allows the user to interact with the system managing menu by taking their
+     * this method allows the user to interact with the system managing menu by
+     * taking their
      * input corresponding
      * to the number of the option they chose
      */
-    public static void manageSystem(BookRentalSystem system) {
+    public static void manageSystem(MovieRentalSystem system) {
         int input = 0;
         manageSystemOptions();
         do {
@@ -231,7 +237,7 @@ public class Admin {
                     System.out.println("\033c");
                     Customer cusToRemove = getCustomerFromSystem(system.getCustomers());
                     system.removeCustomer(cusToRemove);
-                    System.out.println("Customer removed successfully!");
+                    System.out.println(ANSI_GREEN + "Customer removed successfully!" + ANSI_RESET);
                     break;
                 case 2:
                     System.out.println("\033c");
@@ -241,16 +247,16 @@ public class Admin {
                     System.out.println("\033c");
                     Movie movieToRemove = getMovieFromSystem(system);
                     system.removeMovie(movieToRemove);
-                    System.out.println("Movie removed successfully!");
+                    System.out.println(ANSI_GREEN + "Movie removed successfully!" + ANSI_RESET);
                     break;
                 case 4:
                     System.out.println("\033c");
                     Movie toAdd = createMovie();
-                    System.out.println("Movie added successfully!");
-                    try { 
-                        system.addMovie(toAdd); 
-                    } catch (IllegalArgumentException e) { 
-                        System.out.println(e.getMessage());
+                    System.out.println(ANSI_GREEN + "Movie added successfully!" + ANSI_RESET);
+                    try {
+                        system.addMovie(toAdd);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(ANSI_RED + e.getMessage() + ANSI_RESET);
                     }
                     break;
                 case 5:
@@ -258,7 +264,7 @@ public class Admin {
                     mainMenu(system);
                     break;
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println(ANSI_RED + "Invalid option. Please try again." + ANSI_RESET);
                     continue;
             }
             manageSystemOptions();
@@ -269,10 +275,11 @@ public class Admin {
      * HELPER METHODS
      ******************************************/
 
-     /**
-      * this method will print all movies
-      * @param {List<Movie>} - represents the movies to print
-      */
+    /**
+     * this method will print all movies
+     * 
+     * @param {List<Movie>} - represents the movies to print
+     */
     public static void printMovies(List<Movie> movies) {
         int index = 1;
         for (Movie m : movies) {
@@ -280,12 +287,13 @@ public class Admin {
             index++;
         }
         if (movies.size() == 0)
-            System.out.println("No movies available!");
+            System.out.println(ANSI_RED + "No movies available!" + ANSI_RESET);
     }
 
     /**
      * this method will print all customers
-     * @param {List<Customer>} - represents the list of customers to print 
+     * 
+     * @param {List<Customer>} - represents the list of customers to print
      */
     public static void printCustomers(List<Customer> cus) {
         int index = 1;
@@ -294,25 +302,23 @@ public class Admin {
             index++;
         }
         if (cus.size() == 0)
-            System.out.println("No customers available!");
+            System.out.println(ANSI_RED + "No customers available!" + ANSI_RESET);
     }
 
     /**
      * this method allows the admin to create a new customer
      * and add that customer to the system.
+     * 
      * @param {BookRentalSystem} - represents the system
      */
-    public static void addCustomerToSystem(BookRentalSystem system)
-    {
-        System.out.println("Please enter the name of the customer:");
+    public static void addCustomerToSystem(MovieRentalSystem system) {
+        System.out.println(ANSI_YELLOW + "Please enter the name of the customer:" + ANSI_RESET);
         Customer cusToAdd = new Customer(scan.nextLine());
         try {
             system.addCustomer(cusToAdd);
-            System.out.println("Customer added successfully!");
-        }
-        catch (IllegalArgumentException e)
-        {
-            System.out.println(e.getMessage());
+            System.out.println(ANSI_GREEN + "Customer added successfully!" + ANSI_RESET);
+        } catch (IllegalArgumentException e) {
+            System.out.println(ANSI_RED + e.getMessage() + ANSI_RESET);
         }
     }
 
@@ -324,7 +330,7 @@ public class Admin {
      * @return - the movie to be returned
      */
     public static Customer getCustomerFromSystem(List<Customer> customers) {
-        System.out.println("Select the customer you would like to manage");
+        System.out.println(ANSI_GREEN + "Select the customer you would like to manage" + ANSI_RESET);
         printCustomers(customers);
         int input = 0;
         while (true) {
@@ -332,102 +338,99 @@ public class Admin {
                 input = Integer.parseInt(scan.nextLine());
                 return customers.get(input - 1);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Please select a valid number");
+                System.out.println(ANSI_RED + "Please select a valid number" + ANSI_RESET);
             } catch (NumberFormatException e) {
-                System.out.println("Enter an integer");
+                System.out.println(ANSI_RED + "Enter an integer" + ANSI_RESET);
             }
         }
     }
 
     /**
-     * this method will allow an admin to select what movie they would like to remove from the database
+     * this method will allow an admin to select what movie they would like to
+     * remove from the database
      * this method already includes validation for stock and if the movie exists in
      * the DB due to the use of the filter.
      * 
      * @param {BookRentalSystem} - represents the whole system
      * @return - the movie selected from the system
      */
-    public static Movie getMovieFromSystem(BookRentalSystem system) {
-        System.out.println("The movies in the system are:");
+    public static Movie getMovieFromSystem(MovieRentalSystem system) {
+        System.out.println(ANSI_GREEN + "The movies in the system are:" + ANSI_RESET);
         printMovies(system.getMovies());
-        System.out.println("Please select the number of the movie you would like to select");
+        System.out.println(ANSI_YELLOW + "Please select the number of the movie you would like to select" + ANSI_RESET);
         int input = 0;
         while (true) {
             try {
                 input = Integer.parseInt(scan.nextLine());
                 return system.getMovies().get(input - 1);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Please select a valid number");
+                System.out.println(ANSI_RED + "Please select a valid number" + ANSI_RESET);
             } catch (NumberFormatException e) {
-                System.out.println("Enter a number");
+                System.out.println(ANSI_RED + "Enter a number" + ANSI_RESET);
             }
         }
 
     }
 
     /**
-     * this method takes all necessary input to create a new movie. 
+     * this method takes all necessary input to create a new movie.
      * this will be used by the system menu in order to add a movie.
+     * 
      * @return - returns the new movie to be added to the database
      */
-    public static Movie createMovie()
-    {
-        System.out.println("Enter the title of the movie: ");
+    public static Movie createMovie() {
+        System.out.println(ANSI_YELLOW + "Enter the title of the movie: " + ANSI_RESET);
         String title = scan.nextLine();
-        System.out.println("Enter the genre of the movie: ");
+        System.out.println(ANSI_YELLOW + "Enter the genre of the movie: " + ANSI_RESET);
         String genre = scan.nextLine();
-        
-        System.out.println("Enter the description of the movie: ");
+
+        System.out.println(ANSI_YELLOW + "Enter the description of the movie: " + ANSI_RESET);
         String description = scan.nextLine();
-        
-        System.out.println("Enter the trailer URL of the movie: ");
+
+        System.out.println(ANSI_YELLOW + "Enter the trailer URL of the movie: " + ANSI_RESET);
         String url = scan.nextLine();
-        while(true)
-        {
+        while (true) {
             try {
-                System.out.println("Enter the duration of the movie: ");
+                System.out.println(ANSI_YELLOW + "Enter the duration of the movie: " + ANSI_RESET);
                 int duration = Integer.parseInt(scan.nextLine());
-                System.out.println("Enter the price of the movie: ");
+                System.out.println(ANSI_YELLOW + "Enter the price of the movie: " + ANSI_RESET);
                 double price = Double.parseDouble(scan.nextLine());
-                System.out.println("Enter the stock of the movie: ");
+                System.out.println(ANSI_YELLOW + "Enter the stock of the movie: " + ANSI_RESET);
                 int stock = Integer.parseInt(scan.nextLine());
-                System.out.println("Is it a digital movie (enter 1) or a DVD (enter 2)?");
+                System.out.println(ANSI_YELLOW + "Is it a digital movie (enter 1) or a DVD (enter 2)?" + ANSI_RESET);
                 int choice = Integer.parseInt(scan.nextLine());
-                switch (choice)
-                {
+                switch (choice) {
                     case 1:
-                        System.out.println("Enter the filesize of the movie: ");
+                        System.out.println(ANSI_YELLOW + "Enter the filesize of the movie: " + ANSI_RESET);
                         int filesize = Integer.parseInt(scan.nextLine());
-                        return(new DigitalMovie(title, genre,
-                        duration, description, price, filesize, stock, url));
+                        return (new DigitalMovie(title, genre,
+                                duration, description, price, filesize, stock, url));
                     case 2:
-                        return(new DVD(title, genre,
-                        duration, description, price, stock, url));
+                        return (new DVD(title, genre,
+                                duration, description, price, stock, url));
                     default:
-                        System.out.println("Input invalid! choose a 1 or 2");
+                        System.out.println(ANSI_RED + "Input invalid! choose a 1 or 2" + ANSI_RESET);
                 }
-            }
-            catch (NumberFormatException e)
-            {
-                System.out.println("Please enter the appropriate numeric input");
-            }
-            catch (IllegalArgumentException e)
-            {
-                System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println(ANSI_RED + "Please enter the appropriate numeric input" + ANSI_RESET);
+            } catch (IllegalArgumentException e) {
+                System.out.println(ANSI_RED + e.getMessage() + ANSI_RESET);
             }
         }
     }
 
     /**
-     * this method invokes the necessary code to select a movie from the database 
+     * this method invokes the necessary code to select a movie from the database
      * whose trailer they would like to view
+     * 
      */
-    public static void playTrailer(BookRentalSystem system) {
-        System.out.println("Would you like to watch a trailer for one of these movies? Enter \"y\" if yes");
+    public static void playTrailer(MovieRentalSystem system) {
+        System.out.println(ANSI_YELLOW + "Would you like to watch a trailer for one of these movies? Enter \"y\" if yes"
+                + ANSI_RESET);
         String decision = scan.nextLine();
         boolean isSuccessful = false;
         if (decision.equals("y")) {
-            System.out.println("Chose your movie by the number that precedes each movie");
+            System.out.println(ANSI_YELLOW + "Chose your movie by the number that precedes each movie" + ANSI_RESET);
             while (!isSuccessful) {
                 try {
                     int movieIndex = Integer.parseInt(scan.nextLine());
@@ -435,9 +438,9 @@ public class Admin {
                     chosenMovie.playTrailer();
                     isSuccessful = true;
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Please select valid movie number.");
+                    System.out.println(ANSI_RED + "Please select valid movie number." + ANSI_RESET);
                 } catch (NumberFormatException e) {
-                    System.out.println("Not a number, try again!");
+                    System.out.println(ANSI_RED + "Not a number, try again!" + ANSI_RESET);
                 }
             }
         }

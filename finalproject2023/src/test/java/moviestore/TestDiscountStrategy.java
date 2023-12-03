@@ -1,15 +1,12 @@
 package moviestore;
 
 import moviestore.products.*;
-import moviestore.*;
 import moviestore.exceptions.LoaderFailedException;
 import moviestore.loader.FileLoader;
 import moviestore.discounts.*;
 import static org.junit.Assert.*;
 import java.util.*;
-import java.io.*;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 
 public class TestDiscountStrategy {
 
@@ -57,7 +54,7 @@ public class TestDiscountStrategy {
     public void testTenDiscount() {
         Movie m = new DVD("The Lost City", "Action-Adventure", 145,
                 "An archeological expedition races against a rival group to uncover a lost city's secrets.", 240, 55,
-                40.50, 5,"https://www.youtube.com/watch?v=nfKO9rYDmE8");
+                40.50, 5, "https://www.youtube.com/watch?v=nfKO9rYDmE8");
         Customer c = new Customer("Bianca", 20000);
         IDiscountStrategy strat = new TenDollarDiscount();
         double finalPrice = strat.finalPrice(c, m);
@@ -69,7 +66,7 @@ public class TestDiscountStrategy {
     public void testTenDiscountException() {
         Movie m = new DVD("The Lost City", "Action-Adventure", 145,
                 "An archeological expedition races against a rival group to uncover a lost city's secrets.", 240, 55,
-                40.50, 5,"https://www.youtube.com/watch?v=nfKO9rYDmE8");
+                40.50, 5, "https://www.youtube.com/watch?v=nfKO9rYDmE8");
         Customer c = new Customer("Bianca", 10000);
         IDiscountStrategy strat = new TenDollarDiscount();
         double finalPrice = strat.finalPrice(c, m);
@@ -79,7 +76,7 @@ public class TestDiscountStrategy {
     public void testTwentyDiscount() {
         Movie m = new DVD("The Lost City", "Action-Adventure", 145,
                 "An archeological expedition races against a rival group to uncover a lost city's secrets.", 240, 55,
-                40.50, 5,"https://www.youtube.com/watch?v=nfKO9rYDmE8");
+                40.50, 5, "https://www.youtube.com/watch?v=nfKO9rYDmE8");
         Customer c = new Customer("Bianca", 30000);
         IDiscountStrategy strat = new TwentyDollarDiscount();
         double finalPrice = strat.finalPrice(c, m);
@@ -91,7 +88,7 @@ public class TestDiscountStrategy {
     public void testTwentyDiscountException() {
         Movie m = new DVD("The Lost City", "Action-Adventure", 145,
                 "An archeological expedition races against a rival group to uncover a lost city's secrets.", 240, 55,
-                40.50, 5,"https://www.youtube.com/watch?v=nfKO9rYDmE8");
+                40.50, 5, "https://www.youtube.com/watch?v=nfKO9rYDmE8");
         Customer c = new Customer("Bianca", 20000);
         IDiscountStrategy strat = new TwentyDollarDiscount();
         double finalPrice = strat.finalPrice(c, m);

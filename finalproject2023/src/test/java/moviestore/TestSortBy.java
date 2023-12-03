@@ -6,12 +6,11 @@ import java.util.List;
 import moviestore.display.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import moviestore.BookRentalSystem;
 
 public class TestSortBy {
         @Test
         public void TestSortByTitle() {
-                BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
+                MovieRentalSystem movies = new MovieRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
                 movies.addMovie(new DVD("The Lost City", "Action-Adventure", 145,
                                 "An archeological expedition races against a rival group to uncover a lost city's secrets.",
                                 240, 55, 40.50, 5, "https://www.youtube.com/watch?v=nfKO9rYDmE8"));
@@ -39,7 +38,7 @@ public class TestSortBy {
 
         @Test
         public void TestSortByPrice() {
-                BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
+                MovieRentalSystem movies = new MovieRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
                 movies.addMovie(new DVD("The Lost City", "Action-Adventure", 145,
                                 "An archeological expedition races against a rival group to uncover a lost city's secrets.",
                                 240, 55, 40.50, 5, "https://www.youtube.com/watch?v=nfKO9rYDmE8"));
@@ -67,7 +66,7 @@ public class TestSortBy {
 
         @Test
         public void TestSortByRating() {
-                BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
+                MovieRentalSystem movies = new MovieRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
                 movies.addMovie(new DVD("The Lost City", "Action-Adventure", 145,
                                 "An archeological expedition races against a rival group to uncover a lost city's secrets.",
                                 240, 55, 40.50, 5, "https://www.youtube.com/watch?v=nfKO9rYDmE8"));
@@ -95,7 +94,7 @@ public class TestSortBy {
 
         @Test
         public void TestSortByDuration() {
-                BookRentalSystem movies = new BookRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
+                MovieRentalSystem movies = new MovieRentalSystem(new ArrayList<Movie>(), new ArrayList<Customer>());
                 movies.addMovie(new DVD("The Lost City", "Action-Adventure", 145,
                                 "An archeological expedition races against a rival group to uncover a lost city's secrets.",
                                 240, 55, 40.50, 5, "https://www.youtube.com/watch?v=nfKO9rYDmE8"));
